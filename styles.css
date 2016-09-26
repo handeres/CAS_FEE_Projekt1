@@ -1,0 +1,18 @@
+
+#pageWrapper {  
+	display: -webkit-box;  /* OLD: Chrome <=20, iOS <=6, Safari <=6 */  
+	display: -moz-box;     /* OLD: Firefox <=21 */  
+	display: -ms-flexbox;  /* TWEENER: IE 10 */  
+	display: -webkit-flex; /* NEW: Chrome 21-28 */  
+	display: flex;         /* NEW (Spec): Chrome >=29, Firefox >=22, IE >=11 */ 
+	
+	flex-direction: row;
+}
+
+#newNote {
+	justify-content: space-between;
+}
+
+
+ 
+
