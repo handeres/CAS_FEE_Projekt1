@@ -1,0 +1,17 @@
+{
+  "name": "CAS_FEE_Projekt1",
+  "version": "1.0.0",
+  "description": "Static webserver",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/handeres/CAS_FEE_Projekt1.git"
+  },
+  "author": "Hannes Anderes",
+  "license": "MIT",
+  "homepage": "https://github.com/handeres/CAS_FEE_Projekt1.git",
+  "dependencies": {
+    "finalhandler": "^0.3.6",
+    "serve-static": "^1.9.2"
+  }
+}

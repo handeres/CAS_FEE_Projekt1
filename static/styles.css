@@ -1,0 +1,24 @@
+
+
+#header {
+	float: left;
+}
+
+#header::after {
+	clear: both;
+}
+
+#newNote {
+	float:left;
+}
+#styleSelect {
+	float: right;
+	witdh: 20%;
+}
+
+
+main {
+	float:left;
+}
+ 
+

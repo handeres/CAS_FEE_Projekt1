@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+ 	<head>
+		<meta charset="utf-8"> 
+		<title>Note Pro</title>
+ 		<script language="javascript" src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
+ 		<script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
+		<script language="javascript" src="notePro.js"></script>
+		<link rel="stylesheet" href="styles.css">
+
+		<script id="note-template" type="text/x-handlebars-template">
+			{{#each this}}
+			<tr>
+				<td>
+					<input type="date" value="{{this.createdDate}}">
+					<input type="checkbox" value="Finished">Finished</input>
+				</td>
+				<td>
+					<p>{{this.title}}</p>
+					<p>{{this.description}}</p>
+				</td>
+				<td>
+					<button type="button">Edit</button>
+				</td>
+			</tr>
+			{{/each}}
+		</script>
+		<script>
+			$(function(){
+				init();
+			});
+		</script>
+	</head>
+	<body>
+		<!-- <div id="pageWrapper">-->
+		<header>
+			<section id="header">
+				<div id="newNote">
+					<button type="button">Create New Note</button>
+				</div>
+				<div id="styleSelect">
+					<select>
+						<option value="Style1">BlackWhite-Style</option>
+						<option value="Style2">Style 2</option>
+					</select>
+				</div>
+			</section>
+		</header>
+			<main role="main">
+				<section id="filters">
+					<button type="button" data-filterType="finishedDate">By finish Date</button>
+					<button type="button" data-filterType="createdDate">By created Date</button>
+					<button type="button" data-filterType="importance">By Importance</button>
+				</section>
+				<div id="showFinished">
+					<button type="button">Show finished</button>
+				</div>
+				<table id="noteList"></table>
+			</main>
+		<!-- </div>	-->
+		<footer role="contentinfo">Copyright: Hannes Anderes</footer>
+ 	</body>
+ </html>
+ 
+ 
