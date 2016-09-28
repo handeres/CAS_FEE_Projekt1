@@ -17,7 +17,7 @@ function init() {
     This function creates table rows from the handlebar template 'node-template'
  */
 function addNoteList(notesList) {
-    var createNodeList = Handlebars.compile($("#note-template").html());
+    var createNodeList = Handlebars.compile($("#note-template2").html());
     $("#noteList").empty();
     $("#noteList").append(createNodeList(notesList));
 }
@@ -73,6 +73,7 @@ function sortNotList(noteList) {
  */
 function filterClickEventHandler(event) {
     var data = $(this).data();
+
     if (null != data) {
         switch(data.filtertype) {
             case "createdDate":
