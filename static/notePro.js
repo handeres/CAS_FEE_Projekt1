@@ -7,19 +7,30 @@ var testData = [
     {"id":"02", "title":"Titel2", "description":"Dies ist auch ein Text", "importance":5, "createdDate":"2016-11-30", "finishedDate":"2016-09-26", "done":false},
 ];
 
+var defaultData = {"id":"01", "title":"New Title", "description":"Add your Text here", "importance":8, "createdDate":"2016-12-26", "finishedDate":"2016-02-26", "done":false};
+
 
 function init() {
-    addNoteList(testData);
+    createNoteList(testData);
     $("#filters").on('click', 'button', filterClickEventHandler);
+    $("#newNote").on('click', 'button', addNewNoteClickEventHandler);
 }
 
 /*
     This function creates table rows from the handlebar template 'node-template'
  */
-function addNoteList(notesList) {
+function createNoteList(notesList) {
     var createNodeList = Handlebars.compile($("#note-template2").html());
     $("#noteList").empty();
     $("#noteList").append(createNodeList(notesList));
+}
+
+/*
+ This function adds a node to the list
+ */
+function addNoteToList(note) {
+    testData.push(note);
+    createNoteList(testData);
 }
 
 /*
@@ -65,7 +76,7 @@ function compareNotesByImportance(s1, s2) {
 
  */
 function sortNotList(noteList) {
-    addNoteList(noteList.sort(compareNotesByDate));
+    createNoteList(noteList.sort(compareNotesByDate));
 }
 
 /*
@@ -77,14 +88,20 @@ function filterClickEventHandler(event) {
     if (null != data) {
         switch(data.filtertype) {
             case "createdDate":
-                return addNoteList(testData.sort(compareNotesByCreatedDate));
+                return createNoteList(testData.sort(compareNotesByCreatedDate));
             case "finishedDate":
-                return addNoteList(testData.sort(compareNotesByFinishedDate));
+                return createNoteList(testData.sort(compareNotesByFinishedDate));
             case "importance":
-                return addNoteList(testData.sort(compareNotesByImportance));
+                return createNoteList(testData.sort(compareNotesByImportance));
             default:
-                return addNoteList(testData.sort(compareNotesByCreatedDate));
+                return createNoteList(testData.sort(compareNotesByCreatedDate));
         }
     }
 }
 
+/*
+ This function adds a new note to the list
+ */
+function addNewNoteClickEventHandler(event) {
+    addNoteToList(defaultData);
+}

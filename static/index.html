@@ -31,12 +31,7 @@
 			{{/each}}
 		</script>
 		<script id="note-template2" type="text/x-handlebars-template">
-			<div class="table-row header">
-				<div class="text">Created Date</div>
-				<div class="text">Description</div>
-				<div class="text">Importance</div>
-				<div class="text">Edit</div>
-			</div>
+
 			{{#each this}}
 			<div class="table-row">
 				<div class="text">
@@ -87,7 +82,14 @@
 							<button class="btn" type="button">Show finished</button>
 						</div>
 				   </div>
-				   <table id="noteList"></table>
+				   <table id="noteList">
+					   <div class="table-row header">
+						   <div class="text">Created Date</div>
+						   <div class="text">Description</div>
+						   <div class="text">Importance</div>
+						   <div class="text">Edit</div>
+					   </div>
+				   </table>
 			 </main>
 		 </div>
 		<footer role="contentinfo">Copyright: Hannes Anderes</footer>
