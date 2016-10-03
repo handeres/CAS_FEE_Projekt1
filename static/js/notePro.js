@@ -12,8 +12,8 @@ var defaultData = {"id":"01", "title":"New Title", "description":"Add your Text 
 
 function init() {
     createNoteList(testData);
-    $("#filters").on('click', 'button', filterClickEventHandler);
-    $("#newNote").on('click', 'button', addNewNoteClickEventHandler);
+    $(".filters").on('click', 'button', filterClickEventHandler);
+    $(".newNote").on('click', 'button', addNewNoteClickEventHandler);
 }
 
 /*
@@ -21,8 +21,8 @@ function init() {
  */
 function createNoteList(notesList) {
     var createNodeList = Handlebars.compile($("#note-template2").html());
-    $("#noteList").empty();
-    $("#noteList").append(createNodeList(notesList));
+    $(".noteList").empty();
+    $(".noteList").append(createNodeList(notesList));
 }
 
 /*
@@ -66,10 +66,14 @@ function compareNotesByImportance(s1, s2) {
     if (s1.importance > s2.importance) {
         return -1;
     }
-    else if (s1.importance < s2.importance ) {
+    else if (s1.importance < s2.importance) {
         return 1;
     }
     return 0;
+}
+
+function sortListOnlyFinished() {
+
 }
 
 /*
@@ -84,7 +88,10 @@ function sortNotList(noteList) {
  */
 function filterClickEventHandler(event) {
     var data = $(this).data();
-
+    //Set all button backgrounds to default
+    $(".filters").children().css({'background':'#3d94f6'});
+    //Set selected target to red
+    $(event.target).css({'background':'red'});
     if (null != data) {
         switch(data.filtertype) {
             case "createdDate":
@@ -99,9 +106,11 @@ function filterClickEventHandler(event) {
     }
 }
 
+
 /*
- This function adds a new note to the list
+    This function adds a new note to the list
  */
 function addNewNoteClickEventHandler(event) {
+
     addNoteToList(defaultData);
 }

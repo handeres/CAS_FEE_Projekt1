@@ -3,97 +3,92 @@
  	<head>
 		<meta charset="utf-8"> 
 		<title>Note Pro</title>
- 		<script language="javascript" src="http://code.jquery.com/jquery-2.2.3.min.js"></script>
- 		<script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/handlebars.js/4.0.5/handlebars.min.js"></script>
-		<script language="javascript" src="notePro.js"></script>
-		<link rel="stylesheet" href="styles.css">
+ 		<script language="javascript" src="js/jquery-2.2.3.min.js"></script>
+ 		<script language="javascript" src="js/handlebars.min.js"></script>
+		<script language="javascript" src="js/notePro.js"></script>
+		<link rel="stylesheet" href="css/styles.css">
 
 		<script id="note-template" type="text/x-handlebars-template">
 			<tr>
-				<th>Created Date</th>
-				<th>Description</th>
-				<th>Edit</th>
-			</tr>
-			{{#each this}}
-			<tr class=".table-row">
-				<td class=".table-row">
-					<input type="date" value="{{this.createdDate}}">
-					<input type="checkbox" value="Finished">Finished</input>
-				</td>
-				<td class=".table-row">
-					<p>{{this.title}}</p>
-					<p>{{this.description}}</p>
-				</td>
-				<td>
-					<button type="button">Edit</button>
-				</td>
-			</tr>
-			{{/each}}
-		</script>
-		<script id="note-template2" type="text/x-handlebars-template">
+				<!--<th>Created Date</th>
 
-			{{#each this}}
-			<div class="table-row">
-				<div class="text">
-					<input type="date" value="{{this.createdDate}}">
-					<input type="checkbox" value="Finished">Finished</input>
-				</div>
-				<div class="text">
-					<p>{{this.title}}</p>
-					<p>{{this.description}}</p>
-				</div>
-				<div class="text">
-					<p>{{this.importance}}</p>
-				</div>
-				<div class="text">
-					<button type="button">Edit</button>
-				</div>
-			</div>
-			{{/each}}
-		</script>
-		<script>
-			$(function(){
-				init();
-			});
-		</script>
-	</head>
-	<body>
-		<div id="pageWrapper">
-			<header>
-				<div id="newNote">
-					<button class="btn" type="button">Create New Note</button>
-				</div>
-				<div id="styleSelect">
-					<p>Choose your Style:</p>
-					<select>
-						<option value="Style1">BlackWhite-Style</option>
-						<option value="Style2">Style 2</option>
-					</select>
-				</div>
-			</header>
-			<main role="main">
-				   <div id="filterOptionen">
-						<section id="filters">
-							<button class="btn" type="button" data-filterType="finishedDate">By finish Date</button>
-							<button class="btn" type="button" data-filterType="createdDate">By created Date</button>
-							<button class="btn" type="button" data-filterType="importance">By Importance</button>
-						</section>
-						<div id="showFinished">
-							<button class="btn" type="button">Show finished</button>
-						</div>
-				   </div>
-				   <table id="noteList">
-					   <div class="table-row header">
-						   <div class="text">Created Date</div>
-						   <div class="text">Description</div>
-						   <div class="text">Importance</div>
-						   <div class="text">Edit</div>
-					   </div>
-				   </table>
-			 </main>
-		 </div>
-		<footer role="contentinfo">Copyright: Hannes Anderes</footer>
- 	</body>
+               <th>Description</th>
+               <th>Edit</th> -->
+           </tr>
+           {{#each this}}
+           <tr class=".table-row">
+               <td class=".table-row">
+                   <input type="date" value="{{this.createdDate}}">
+                   <input type="checkbox" value="Finished">Finished</input>
+               </td>
+               <td class=".table-row">
+                   <p>{{this.title}}</p>
+                   <p>{{this.description}}</p>
+               </td>
+               <td>
+                   <button type="button">Edit</button>
+               </td>
+           </tr>
+           {{/each}}
+       </script>
+       <script id="note-template2" type="text/x-handlebars-template">
+
+           {{#each this}}
+           <div class="table-row">
+               <div class="text">
+                   <input type="date" value="{{this.createdDate}}">
+                   <input type="checkbox" value="Finished">Finished</input>
+               </div>
+               <div>
+                   <p class="title">{{this.title}}</p>
+                   <input class="description" type="text" disabled="disabled" value="{{this.description}}"/>
+               </div>
+               <div>
+                   <p class="importance">{{this.importance}}</p>
+               </div>
+               <div class="text">
+                   <button type="button">Edit</button>
+               </div>
+           </div>
+           {{/each}}
+       </script>
+       <script>
+           $(function(){
+               init();
+           });
+       </script>
+   </head>
+   <body>
+       <div id="pageWrapper">
+           <header>
+               <div class="newNote">
+                   <button class="btn" type="button">Create New Note</button>
+               </div>
+               <div class="styleSelect">
+                   <p>Choose your Style:</p>
+                   <select>
+                       <option value="Style1">BlackWhite-Style</option>
+                       <option value="Style2">Style 2</option>
+                   </select>
+               </div>
+           </header>
+           <main role="main">
+                  <div class="filterOptionen ">
+                       <section class="filters">
+                           <button class="btn" type="button" data-filterType="finishedDate">By finish Date</button>
+                           <button class="btn" type="button" data-filterType="createdDate">By created Date</button>
+                           <button class="btn" type="button" data-filterType="importance">By Importance</button>
+                       </section>
+                       <div class="showFinished">
+                           <button class="btn" type="button">Show finished</button>
+                       </div>
+                  </div>
+                  <table class="noteList">
+                      <div class="table-row header"></div>
+                   </table>
+             </main>
+         </div>
+        <footer role="contentinfo">Designed: Hannes Anderes</footer>
+     </body>
  </html>
- 
- 
+

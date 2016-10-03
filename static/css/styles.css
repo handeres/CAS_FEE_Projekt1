@@ -11,12 +11,12 @@ header {
 	background:  #FFAF0A;/*#f3f3f3;*/
 	display: flex;
 	lex-flow: row;
-	margin: 50px 50px 10px 50px;
+	margin: 50px 50px 0px 50px;
 }
 
 main {
 	background: #f3f3f3;
-	margin: 0px 50px 10px 50px;
+	margin: 0px 50px 0px 50px;
 }
 
 footer {
@@ -26,40 +26,47 @@ footer {
 	height:100px;
 }
 
-#styleSelect {
+.styleSelect {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
 	width: 50%;
+	flex: 0 1 auto;
 }
 
-#newNote  {
+.newNote  {
 	width: 50%;
 	justify-content: flex-start;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
+	flex: 0 1 auto;
 }
 
-#filterOptionen {
+.filterOptionen {
 	display: flex;
+
 }
 
-#filters{
+.filters{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
 	width: 80%;
+	flex-direction: row;
+	flex-wrap: wrap;
+
 }
 
-#showFinished {
-	display: flex;
+.showFinished {
+	/*display: flex;*/
 	justify-content: flex-end;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
 	width: 20%;
 	padding: 0px 0px 0px 0px;
+	flex: 0 1 auto;
 }
 
 /* Button Styles */
@@ -80,6 +87,7 @@ footer {
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
 	margin: 10px 10px 10px 10px;
+	flex: 0 1 auto;
 }
 .btn:hover {
 	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
@@ -96,36 +104,57 @@ table {
 }
 
 .table-row {
-	   display: flex;
-	   flex-direction: row;
-	   flex-grow: 0;
-	   flex-wrap: wrap;
-	   width: 100%;
+   display: flex;
+   flex-direction: row;
+   flex-wrap: wrap;
+   width: 100%;
+	justify-content: flex-start;
+	align-content: flex-start;
+	flex: 0 1 auto;
 }
 
 .text {
-	   flex-grow: 1;
-	   overflow: hidden;
-	   white-space: nowrap;
-	   text-overflow: ellipsis;
-	   padding-right: 20px;
-	   width: 180px;
+	flex: 0 1 auto;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+	width: 25%;
+	align-self: auto;
+}
+
+.description {
+	flex: 0 1 auto;
+	width: 500px;
+	height: 60px;
+	align-self: auto;
+}
+
+.title {
+	flex: 0 1 auto;
+	width: 50%;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 10px 0px;
+	align-self: auto;
+}
+
+.importance {
+	flex: 0 1 auto;
+	width: 50%;
+	padding: 0px 0px 0px 0px;
+	margin: 0px 0px 10px 0px;
+	align-self: auto;
 }
 
 .table-row {
+	flex: 0 1 auto;
 	border-bottom: 2px solid #e0e0e0;
 	border-collapse: collapse;
 	padding-top: 5px;
 }
 
 .table-row.header {
+	flex: 0 1 auto;
 	background-color: #FFEEDB;
 	font-weight: bold;
 	padding-top: 8px;
 	padding-bottom: 8px;
 }
-
-
-
-
-
