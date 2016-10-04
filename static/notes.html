@@ -6,24 +6,42 @@
         <script language="javascript" src="js/jquery-2.2.3.min.js"></script>
         <script language="javascript" src="js/handlebars.min.js"></script>
         <script language="javascript" src="js/notePro.js"></script>
+		<link rel="stylesheet" href="css/notesStyles.css">
     </head>
     <body>
     <div id="pageWrapper">
         <header>
             <h1>New Note</h1>
-            <hr>
         </header>
         <main role="main">
-          <p>Title</p>
-          <input class="title" type="text"/>
-          <p>Beschreibung</p>
-          <input class="beschreibung" type="text"/>
-          <p>Wichtigkeit</p>
-          <input class="wichtigkeit" type="number"/>
-          <p>Fertig Bis</p>
-          <input class="date" type="date"/>
-          <input class="date" type="checkbox">Finished!</input>
+			 <div id="inputWrapper">
+				 <div class="noteInput">
+					  <p>Title</p>
+					  <input id="title" type="text" min="1"/>
+				 </div>
+				  <div class="noteInput">
+					  <p>Description</p>
+					  <input id="beschreibung" type="text"/>
+				  </div>
+				  <div class="noteInput">
+					  <p>Importance</p>
+					  <input id="wichtigkeit" type="number" min="1" max="5"/>
+				  </div>
+				  <div class="noteInput">
+					  <p>Finish until</p>
+					  <input id="date" type="date"/>
+				  </div>
+				  <div class="noteInput">
+					<input id="finished" type="checkbox">Finished!</input>
+				  </div>
+				  <div>
+					  <input class="btn" type="button" value="Save"></button> 
+					  <input class="btn" type="button" value="Cancel"></button> 
+				  </div>
+			</div>		 
         </main>
+		<footer role="contentinfo">Designed By: Hannes Anderes</footer>
     </div>
+	
     </body>
 </html>
