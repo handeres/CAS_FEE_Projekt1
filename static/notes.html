@@ -4,9 +4,14 @@
         <meta charset="utf-8">
         <title>Note Pro- New Note</title>
         <script language="javascript" src="js/jquery-2.2.3.min.js"></script>
-        <script language="javascript" src="js/handlebars.min.js"></script>
-        <script language="javascript" src="js/notePro.js"></script>
-		<link rel="stylesheet" href="css/notesStyles.css">
+        <script language="javascript" src="js/data.js"></script>
+        <script language="javascript" src="js/notes.js"></script>
+		<link rel="stylesheet" href="css/notesStyles.css">        
+        <script>
+           $(function(){
+               init();
+           });
+       </script>
     </head>
     <body>
     <div id="pageWrapper">
@@ -14,34 +19,31 @@
             <h1>New Note</h1>
         </header>
         <main role="main">
-			 <div id="inputWrapper">
-				 <div class="noteInput">
-					  <p>Title</p>
-					  <input id="title" type="text" min="1"/>
-				 </div>
-				  <div class="noteInput">
-					  <p>Description</p>
-					  <input id="beschreibung" type="text"/>
-				  </div>
-				  <div class="noteInput">
-					  <p>Importance</p>
-					  <input id="wichtigkeit" type="number" min="1" max="5"/>
-				  </div>
-				  <div class="noteInput">
-					  <p>Finish until</p>
-					  <input id="date" type="date"/>
-				  </div>
-				  <div class="noteInput">
-					<input id="finished" type="checkbox">Finished!</input>
-				  </div>
-				  <div>
-					  <input class="btn" type="button" value="Save"></button> 
-					  <input class="btn" type="button" value="Cancel"></button> 
-				  </div>
-			</div>		 
+            <form>  
+                <div class="noteInput">
+                    <p>Title</p>
+                    <input id="title" type="text" pattern=".{1,}" required/>
+                </div>
+                <div class="noteInput">
+                    <p>Description</p>
+                    <textarea rows="10" id="description" pattern=".{1,}" required></textarea>
+                </div>
+                <div class="noteInput">
+                    <p>Importance</p>
+                    <input id="importance" type="number" min="1" max="5" required/>
+                </div>
+                <div class="noteInput">
+                    <p>Finish until</p>
+                    <input id="date" type="date" required/>
+                </div>
+                <div class="noteInput">
+                    <input id="done" type="checkbox">Finished!<br>
+                </div>
+                <button id="save" class="btn" type="submit"  >Save</button>       
+                <button id="cancel" class="btn" type="button">Cancel</button>                        
+            </form>
         </main>
 		<footer role="contentinfo">Designed By: Hannes Anderes</footer>
-    </div>
-	
+    </div>	
     </body>
 </html>

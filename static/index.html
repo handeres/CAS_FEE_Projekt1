@@ -5,38 +5,16 @@
 		<title>Note Pro</title>
  		<script language="javascript" src="js/jquery-2.2.3.min.js"></script>
  		<script language="javascript" src="js/handlebars.min.js"></script>
+        <script language="javascript" src="js/data.js"></script>
 		<script language="javascript" src="js/notePro.js"></script>
 		<link rel="stylesheet" href="css/styles.css">
 
-		<script id="note-template" type="text/x-handlebars-template">
-			<tr>
-				<!--<th>Created Date</th>
-
-               <th>Description</th>
-               <th>Edit</th> -->
-           </tr>
-           {{#each this}}
-           <tr class=".table-row">
-               <td class=".table-row">
-                   <input type="date" value="{{this.createdDate}}">
-                   <input type="checkbox" value="Finished">Finished</input>
-               </td>
-               <td class=".table-row">
-                   <p>{{this.title}}</p>
-                   <p>{{this.description}}</p>
-               </td>
-               <td>
-                   <button type="button">Edit</button>
-               </td>
-           </tr>
-           {{/each}}
-       </script>
-       <script id="note-template2" type="text/x-handlebars-template">
+        <script id="note-template" type="text/x-handlebars-template">
            {{#each this}}
            <div class="table-row">
                <div class="text">
-                   <input type="date" value="{{this.createdDate}}">
-                   <input type="checkbox" value="Finished">Finished</input>
+                   <input type="date" value="{{this.finishedDate}}" disabled>
+                   <input type="checkbox" name="Finished" {{#if this.done}}checked{{/if}} disabled>Finished<br>
                </div>
                <div>
                    <p class="title">{{this.title}}</p>
@@ -50,12 +28,12 @@
                </div>
            </div>
            {{/each}}
-       </script>
-       <script>
+        </script>
+        <script>
            $(function(){
                init();
            });
-       </script>
+        </script>
    </head>
    <body>
        <div id="pageWrapper">

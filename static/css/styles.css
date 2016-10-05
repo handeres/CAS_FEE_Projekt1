@@ -97,6 +97,10 @@ footer {
 	top:1px;
 }
 
+.btn_background{
+   background: red;
+}
+
 /* Table Styles */
 table {
 	width: 100%;

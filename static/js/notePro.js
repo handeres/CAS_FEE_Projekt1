@@ -1,36 +1,40 @@
 /**
- * Created by Hannes on 26.09.2016.
+ * Created by Hannes Anderes on 26.09.2016.
  */
 
-var testData = [
-    {"id":"01", "title":"Titel1", "description":"Dies ist ein Text", "importance":7, "createdDate":"2016-10-26", "finishedDate":"2016-09-26", "done":false},
-    {"id":"02", "title":"Titel2", "description":"Dies ist auch ein Text", "importance":5, "createdDate":"2016-11-30", "finishedDate":"2016-09-26", "done":false},
-];
+'use strict'
 
-var defaultData = {"id":"01", "title":"New Title", "description":"Add your Text here", "importance":8, "createdDate":"2016-12-26", "finishedDate":"2016-02-26", "done":false};
+var globalNodeList = [];
+var noteManager = {};
 
 
 function init() {
-    createNoteList(testData);
+    /* Read note list from the persistance */
+    globalNodeList = readNoteList();
+    noteManager.finishedFillteActive = false;
+    if (null != globalNodeList) {
+        createNoteList(globalNodeList);
+    }
     $(".filters").on('click', 'button', filterClickEventHandler);
-    $(".newNote").on('click', 'button', addNewNoteClickEventHandler);
+    $(".newNote").on('click', 'button', newNoteClickEventHandler);
+    $(".showFinished .btn").on('click', finishedClickEventHandler);   
 }
 
 /*
     This function creates table rows from the handlebar template 'node-template'
  */
 function createNoteList(notesList) {
-    var createNodeList = Handlebars.compile($("#note-template2").html());
+    var createNodeList = Handlebars.compile($("#note-template").html());
     $(".noteList").empty();
     $(".noteList").append(createNodeList(notesList));
 }
 
-/*
- This function adds a node to the list
- */
-function addNoteToList(note) {
-    testData.push(note);
-    createNoteList(testData);
+
+function readNodeListFiltered(notesList) {
+    var filteredNoteList = jQuery.grep(notesList, function(note, i){
+        return (note.done === true);
+    });
+    return filteredNoteList;
 }
 
 /*
@@ -72,15 +76,12 @@ function compareNotesByImportance(s1, s2) {
     return 0;
 }
 
-function sortListOnlyFinished() {
-
-}
 
 /*
 
  */
 function sortNotList(noteList) {
-    createNoteList(noteList.sort(compareNotesByDate));
+    createNoteList(globalNodeList.sort(compareNotesByDate));
 }
 
 /*
@@ -92,25 +93,39 @@ function filterClickEventHandler(event) {
     $(".filters").children().css({'background':'#3d94f6'});
     //Set selected target to red
     $(event.target).css({'background':'red'});
+    //$(event.target).toggleClass('btn_background');
     if (null != data) {
         switch(data.filtertype) {
             case "createdDate":
-                return createNoteList(testData.sort(compareNotesByCreatedDate));
+                noteManager.currentFilter = compareNotesByCreatedDate;  
+                break;
             case "finishedDate":
-                return createNoteList(testData.sort(compareNotesByFinishedDate));
+                noteManager.currentFilter = compareNotesByFinishedDate;
+                break;
             case "importance":
-                return createNoteList(testData.sort(compareNotesByImportance));
+                noteManager.currentFilter = compareNotesByImportance;
+                break;
             default:
-                return createNoteList(testData.sort(compareNotesByCreatedDate));
+                noteManager.currentFilter = compareNotesByCreatedDate; 
+                break;
         }
+        return createNoteList(globalNodeList.sort(noteManager.currentFilter));
     }
 }
 
-
-/*
-    This function adds a new note to the list
- */
-function addNewNoteClickEventHandler(event) {
-
-    addNoteToList(defaultData);
+function newNoteClickEventHandler(event) {
+    //Save current settings
+    window.location.href='../notes.html';
+}
+    
+function finishedClickEventHandler(event) {$
+    //Change backround
+    $(".showFinished .btn").toggleClass('btn_background');   
+    globalNodeList = readNoteList();
+                                           
+    if (false == noteManager.finishedFillteActive) {
+        globalNodeList = readNodeListFiltered(globalNodeList);        
+    }
+    noteManager.finishedFillteActive = !noteManager.finishedFillteActive;
+    createNoteList(globalNodeList.sort(noteManager.currentFilter));
 }
