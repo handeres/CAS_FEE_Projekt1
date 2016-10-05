@@ -6,20 +6,18 @@
 
 var storageKey = "notes";
 
-function hasNote(note) {
-    
+function noteExists(note) {  
     // Read object array from local storage
     var notes = readNoteList();
     if (null == notes) {
         return false;
     }
-    //Check if title already exist as unique key
-    //for(note )
-    /*if (localStorage.getItem(note.title) === null) {
-        return false;
-    }*/
-    //Titel already exist
-    return true;   
+    for (iterNote in notes) {
+        if(iterNote.title == note.title) {
+            return true;
+        }
+    }
+    return false;   
 }
 
 /**

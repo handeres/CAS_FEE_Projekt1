@@ -4,20 +4,25 @@
 
 'use strict'
 
-
+/**
+ * Initialized the event handler
+ * @returns {void}
+ */
 function init() {
     $("form").on('submit', saveClickEventHandler);
     $("#cancel").on('click', goBackEventHandler);
-
-    //Preset finished date with today
-    //$("#finishedDate").val(getCurrentDate());
 }
+
 
 function saveClickEventHandler(event) {
     
     var newNote = {};
 
     newNote.title        = $("#title").val();
+    if (true == noteExists(newNote.title)) {
+        alert("Titel Already exist!")
+        return;
+    }
     newNote.description  = $("#description").val();
     newNote.importance   = $("#importance").val(); 
     newNote.finishedDate = $("#date").val(); 

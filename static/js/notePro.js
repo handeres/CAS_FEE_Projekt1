@@ -78,13 +78,6 @@ function compareNotesByImportance(s1, s2) {
 
 
 /*
-
- */
-function sortNotList(noteList) {
-    createNoteList(globalNodeList.sort(compareNotesByDate));
-}
-
-/*
     This function is an button event handler for the filter functionality
  */
 function filterClickEventHandler(event) {
@@ -93,6 +86,7 @@ function filterClickEventHandler(event) {
     $(".filters").children().css({'background':'#3d94f6'});
     //Set selected target to red
     $(event.target).css({'background':'red'});
+    //$(event.target).toggleClass('btn_background');  
     //$(event.target).toggleClass('btn_background');
     if (null != data) {
         switch(data.filtertype) {

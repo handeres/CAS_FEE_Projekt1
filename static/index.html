@@ -17,12 +17,12 @@
                    <input type="checkbox" name="Finished" {{#if this.done}}checked{{/if}} disabled>Finished<br>
                </div>
                <div>
-                   <p class="title">{{this.title}}</p>
-                   <input class="description" type="text" disabled="disabled" value="{{this.description}}"/>
-               </div>
-               <div>
-                   <p class="importance">{{this.importance}}</p>
-               </div>
+                   <div class="output">
+                       <p class="title">{{this.title}}</p>
+                       <p class="importance">{{this.importance}}</p>
+                   </div>
+                   <textarea class="description" type="text" disabled="disabled">{{this.description}}</textarea>                   
+               </div>             
                <div class="text">
                    <button type="button">Edit</button>
                </div>
@@ -61,7 +61,7 @@
                        </div>
                   </div>
                   <table class="noteList">
-                      <div class="table-row header"></div>
+                      <!--<div class="table-row header"></div> -->
                    </table>
              </main>
          </div>

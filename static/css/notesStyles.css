@@ -20,6 +20,7 @@ header {
 main {	
 	background: #f3f3f3;
 	margin: 0px 50px 0px 50px;
+  /*  min-width: 340px;*/
 }
 
 p {
@@ -30,8 +31,11 @@ input[type="text"], input[type="number"], input[type="date"], textArea {
 	display: flex;
 	border-radius: 5px;
 	flex: 0 1 auto;
-	width:50%;S
-	
+	width:50%;
+}
+
+input[type="checkbox" i] {
+    margin-left: 0px;
 }
 
 .noteInput {
@@ -68,7 +72,7 @@ form {
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
-	margin: 10px 10px 10px 10px;
+	margin: 10px 10px 10px 0px;
 	flex: 0 1 auto;
 }
 .btn:hover {
@@ -79,6 +83,8 @@ form {
 	position:relative;
 	top:1px;
 }
+
+
 
 footer {
 	padding: 10px;
