@@ -12,8 +12,8 @@ function noteExists(note) {
     if (null == notes) {
         return false;
     }
-    for (iterNote in notes) {
-        if(iterNote.title == note.title) {
+    for (var index in notes) {
+        if(notes[index].uniqueID == note.uniqueID) {
             return true;
         }
     }
@@ -21,11 +21,29 @@ function noteExists(note) {
 }
 
 /**
- * Saves a note to the note list
+ * Finds a note object by uniqueID as key
+ * @param {string} Title of the note
+ * @returns {note}
+ */
+function getNoteByTitel(uniqueID) {
+    var notes = readNoteList();
+    if (null == notes) {
+        return null;
+    }
+    for (var index in notes) {
+        if(notes[index].uniqueID === uniqueID) {
+            return notes[index];
+        }
+    }
+    return null;   
+}
+
+/**
+ * Saves a new note to the note list
  * @param {note} Note object to be saved
  * @returns {void}
  */
-function saveNote(note) {  
+function saveNewNote(note) {  
     var notes = readNoteList();
     if (null == notes) {
         notes = [];
@@ -35,8 +53,26 @@ function saveNote(note) {
 }
 
 /**
- * Reads the note object list
- * @returns {noteList[]}
+ * Saves a edited note to the note list
+ * @param {note} Note object to be saved
+ * @returns {void}
+ */
+function saveEditedNote(note) {  
+    var notes = readNoteList();
+    if (null != notes) {
+        for (var index in notes) {
+            if(notes[index].uniqueID === note.uniqueID) {
+                notes[index] = note;
+                break;
+            }
+        }
+    }
+    saveNoteList(notes);
+}
+
+/**
+ * Reads the note object array
+ * @returns {note[]}
  */
 function readNoteList() {
     var notes = JSON.parse(localStorage.getItem(storageKey));
@@ -45,7 +81,7 @@ function readNoteList() {
   
 /**
  * Saves note list to the storage.
- * @param {noteList[]} Note object list
+ * @param {note[]} Note object arry
  * @returns {void} 
  */
 function saveNoteList(notList) {

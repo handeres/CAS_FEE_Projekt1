@@ -7,6 +7,17 @@
 var globalNodeList = [];
 var noteManager = {};
 
+$(function() {
+    
+    //Register Handlebar Helperfunction to build a for loop
+	Handlebars.registerHelper('for', function(count, options) {
+	  var ret = "";
+	  for(var i=0; i < count; i++) {
+		ret = ret + options.fn(count);
+	  }
+	  return ret;
+	});
+});
 
 function init() {
     /* Read note list from the persistance */
@@ -17,7 +28,7 @@ function init() {
     }
     $(".filters").on('click', 'button', filterClickEventHandler);
     $(".newNote").on('click', 'button', newNoteClickEventHandler);
-    $(".showFinished .btn").on('click', finishedClickEventHandler);   
+    $(".showFinished .btn").on('click', finishedClickEventHandler);  	  
 }
 
 /*
@@ -86,8 +97,6 @@ function filterClickEventHandler(event) {
     $(".filters").children().css({'background':'#3d94f6'});
     //Set selected target to red
     $(event.target).css({'background':'red'});
-    //$(event.target).toggleClass('btn_background');  
-    //$(event.target).toggleClass('btn_background');
     if (null != data) {
         switch(data.filtertype) {
             case "createdDate":
@@ -112,7 +121,7 @@ function newNoteClickEventHandler(event) {
     window.location.href='../notes.html';
 }
     
-function finishedClickEventHandler(event) {$
+function finishedClickEventHandler(event) {
     //Change backround
     $(".showFinished .btn").toggleClass('btn_background');   
     globalNodeList = readNoteList();
@@ -123,3 +132,25 @@ function finishedClickEventHandler(event) {$
     noteManager.finishedFillteActive = !noteManager.finishedFillteActive;
     createNoteList(globalNodeList.sort(noteManager.currentFilter));
 }
+
+function editClickEventHandler(event) {
+    //Save current settings
+    window.location.href='../notes.html?Page=edit'+'&'+"key=Erste Titel";    
+}
+
+$.extend({
+  getUrlVars: function(){
+    var vars = [], hash;
+    var hashes = window.location.href.slice(window.location.href.indexOf('?') + 1).split('&');
+    for(var i = 0; i < hashes.length; i++)
+    {
+      hash = hashes[i].split('=');
+      vars.push(hash[0]);
+      vars[hash[0]] = hash[1];
+    }
+    return vars;
+  },
+  getUrlVar: function(name){
+    return $.getUrlVars()[name];
+  }
+});
