@@ -64,11 +64,11 @@ function compareNotesByCreatedDate(s1, s2) {
 /*
     This function compares two nodes by the finished date
  */
-function compareNotesByFinishedDate(s1, s2) {
-    if (s1.finishedDate > s2.finishedDate) {
+function compareNotesByFinishUntil(s1, s2) {
+    if (s1.finishUntil > s2.finishUntil) {
         return -1;
     }
-    else if (s1.finishedDate < s2.finishedDate) {
+    else if (s1.finishUntil < s2.finishUntil) {
         return 1;
     }
     return 0;
@@ -103,7 +103,7 @@ function filterClickEventHandler(event) {
                 noteManager.currentFilter = compareNotesByCreatedDate;  
                 break;
             case "finishedDate":
-                noteManager.currentFilter = compareNotesByFinishedDate;
+                noteManager.currentFilter = compareNotesByFinishUntil;
                 break;
             case "importance":
                 noteManager.currentFilter = compareNotesByImportance;

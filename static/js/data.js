@@ -6,6 +6,11 @@
 
 var storageKey = "notes";
 
+/**
+ * Checks if a note already exists
+ * @param {note} note object
+ * @returns {bool}
+ */
 function noteExists(note) {  
     // Read object array from local storage
     var notes = readNoteList();
@@ -22,10 +27,10 @@ function noteExists(note) {
 
 /**
  * Finds a note object by uniqueID as key
- * @param {string} Title of the note
+ * @param {string} uniqueID of the note
  * @returns {note}
  */
-function getNoteByTitel(uniqueID) {
+function getNoteByUniqueID(uniqueID) {
     var notes = readNoteList();
     if (null == notes) {
         return null;
@@ -76,6 +81,11 @@ function saveEditedNote(note) {
  */
 function readNoteList() {
     var notes = JSON.parse(localStorage.getItem(storageKey));
+    for (var index in notes) {
+        if (true === notes[index].done) {
+            notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();  
+        }
+    }
     return notes; //For debug reason
 }
   

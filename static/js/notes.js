@@ -11,7 +11,8 @@
 function init() {
     $("form").on('submit', saveClickEventHandler);
     $("#cancel").on('click', goBackEventHandler);
-    
+    $("#done").on('click', finishedEventHandler);
+       
     /* Same page used for create note and edit note. 
      * Title is dynamically.
      */
@@ -37,16 +38,19 @@ function saveClickEventHandler(event) {
     newNote.title        = $("#title").val();
     newNote.description  = $("#description").val();
     newNote.importance   = $("#importance").val(); 
-    newNote.finishedDate = $("#date").val(); 
+    newNote.finishUntil  = $("#date").val(); 
     newNote.createdDate  = getCurrentDate();
     newNote.done         = $("#done").is(":checked");   
     newNote.uniqueID     = $("#uniqueID").val();
+    newNote.finishedDate = $("#finishedDate").val();
+    newNote.createdDate  = $("#createdDate").val();
     
     //Check if it is a new entry
     if (    (undefined === newNote.uniqueID) 
          || ("" === newNote.uniqueID)){
         /* genarete a key if the entry is new created */
-        newNote.uniqueID = $.getUniqueID(10);
+        newNote.uniqueID     = $.getUniqueID(10);
+        newNote.createdDate  = $.now();
         saveNewNote(newNote); 
     } else {
         /* data was edited. Overwrite data in the list */
@@ -60,17 +64,29 @@ function saveClickEventHandler(event) {
  * Load note object from the storage by uniqueID as key
  * @returns {void}
  */
-function loadNote(titel) {
-    var note = getNoteByTitel(titel);
+function loadNote(uniqueID) {
+    var note = getNoteByUniqueID(uniqueID);
     if (null != note) {
         $("#title").val(note.title)
         $("#description").val(note.description);
         $("#importance").val(note.importance); 
-        $("#date").val(note.finishedDate);
+        $("#date").val(note.finishUntil);
         if (true == note.done) {
             $("#done").attr("checked", "true");
         }
         $("#uniqueID").val(note.uniqueID);
+        $("#createdDate").val(note.createdDate);
+        $("#finishedDate").val(note.finishedDate);
+    }
+}
+
+
+function  finishedEventHandler(event) {
+    if ($('#done').is(':checked') == true) {
+         var date = new Date();
+         $("#finishedDate").val(date);        
+    } else {
+         $("#finishedDate").val("");
     }
 }
 

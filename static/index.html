@@ -6,15 +6,16 @@
  		<script language="javascript" src="js/jquery/jquery-2.2.3.min.js"></script>
  		<script language="javascript" src="js/handlebars/handlebars.min.js"></script>
         <script language="javascript" src="js/data.js"></script>
-		<script language="javascript" src="js/notePro.js"></script>
+        <script language="javascript" src="js/moment/moment.js"></script>
+		<script language="javascript" src="js/main.js"></script>
 		<link rel="stylesheet" href="css/styles.css">
 
         <script id="note-template" type="text/x-handlebars-template">
            {{#each this}}
            <div class="table-row">
                <div class="text">
-                   <input type="date" value="{{this.finishedDate}}" disabled>
-                   <input type="checkbox" name="Finished" {{#if done}}checked{{/if}} disabled>Finished<br>
+                   <input type="date" value="{{finishUntil}}" disabled>
+                   <input type="checkbox" name="Finished" {{#if done}}checked{{/if}} disabled>Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}
                </div>
                <div>
                    <div class="output">
