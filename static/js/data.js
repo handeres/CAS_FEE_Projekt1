@@ -1,100 +1,48 @@
 /**
  * Created by Hannes Anderes on 05.10.2016.
  */
+var noteDataStorage = (function() {
 
-'use strict'
+    "use strict"
 
-var storageKey = "notes";
-
-/**
- * Checks if a note already exists
- * @param {note} note object
- * @returns {bool}
- */
-function noteExists(note) {  
-    // Read object array from local storage
-    var notes = readNoteList();
-    if (null == notes) {
-        return false;
+    function DataStorage() {
+        this.storageKey = "notes";
     }
-    for (var index in notes) {
-        if(notes[index].uniqueID == note.uniqueID) {
-            return true;
-        }
-    }
-    return false;   
-}
 
-/**
- * Finds a note object by uniqueID as key
- * @param {string} uniqueID of the note
- * @returns {note}
- */
-function getNoteByUniqueID(uniqueID) {
-    var notes = readNoteList();
-    if (null == notes) {
-        return null;
+    /**
+     * Saves note list to the storage.
+     * @param {note[]} Note object arry
+     * @returns {void}
+     */
+    function publicSaveNoteList(notList) {
+        return localStorage.setItem("notes", JSON.stringify(notList));
     }
-    for (var index in notes) {
-        if(notes[index].uniqueID === uniqueID) {
-            return notes[index];
-        }
-    }
-    return null;   
-}
 
-/**
- * Saves a new note to the note list
- * @param {note} Note object to be saved
- * @returns {void}
- */
-function saveNewNote(note) {  
-    var notes = readNoteList();
-    if (null == notes) {
-        notes = [];
-    }
-    notes.push(note);
-    saveNoteList(notes);
-}
-
-/**
- * Saves a edited note to the note list
- * @param {note} Note object to be saved
- * @returns {void}
- */
-function saveEditedNote(note) {  
-    var notes = readNoteList();
-    if (null != notes) {
+    /**
+     * Reads the note object array
+     * @returns {note[]}
+     */
+    function publicReadNoteList() {
+        var notes = JSON.parse(localStorage.getItem("notes"));//this.prototype.loadNotesFromStorage();
         for (var index in notes) {
-            if(notes[index].uniqueID === note.uniqueID) {
-                notes[index] = note;
-                break;
+            if (true === notes[index].done) {
+                notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();
             }
         }
+        return notes; //For debug reason
     }
-    saveNoteList(notes);
-}
 
-/**
- * Reads the note object array
- * @returns {note[]}
- */
-function readNoteList() {
-    var notes = JSON.parse(localStorage.getItem(storageKey));
-    for (var index in notes) {
-        if (true === notes[index].done) {
-            notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();  
-        }
+    DataStorage.prototype.loadNotesFromStorage = function() {
+        return JSON.parse(localStorage.getItem(storageKey));
     }
-    return notes; //For debug reason
-}
-  
-/**
- * Saves note list to the storage.
- * @param {note[]} Note object arry
- * @returns {void} 
- */
-function saveNoteList(notList) {
-    return localStorage.setItem(storageKey, JSON.stringify(notList));
-}
-    
+
+     DataStorage.prototype.saveNotesToStorage = function(noteList) {
+        localStorage.setItem(storageKey, JSON.stringify(notList));
+    }
+
+    return {
+        saveNoteList : publicSaveNoteList,
+        readNoteList : publicReadNoteList,
+    };
+
+})();

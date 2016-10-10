@@ -5,9 +5,11 @@
 		<title>Note Pro</title>
  		<script language="javascript" src="js/jquery/jquery-2.2.3.min.js"></script>
  		<script language="javascript" src="js/handlebars/handlebars.min.js"></script>
-        <script language="javascript" src="js/data.js"></script>
         <script language="javascript" src="js/moment/moment.js"></script>
+        <script language="javascript" src="js/data.js"></script>
+        <script language="javascript" src="js/note.js"></script>
 		<script language="javascript" src="js/main.js"></script>
+        <script language="javascript" src="js/utilities.js"></script>
 		<link rel="stylesheet" href="css/styles.css">
 
         <script id="note-template" type="text/x-handlebars-template">
@@ -27,22 +29,17 @@
                    <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>                   
                </div>             
                <div class="text">
-                   <button  class="btn" type="button" onclick="window.location.href='../notes.html?Page=edit&Key={{uniqueID}}'">Edit</button>
+                   <button class="editNote btn" type="button" data-uniqueID="{{uniqueID}}">Edit</button>
                </div>
            </div>
            {{/each}}
-        </script>
-        <script>
-           $(function(){
-               init();
-           });
         </script>
    </head>
    <body>
        <div id="pageWrapper">
            <header>
                <div class="newNote">
-                   <button class="btn" type="button" onclick="window.location.href='../notes.html'">Create New Note</button>
+                   <button class="btn" type="button">Create New Note</button>
                </div>
                <div class="styleSelect">
                    <p>Choose your Style:</p>
