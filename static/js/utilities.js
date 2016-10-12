@@ -5,23 +5,47 @@
  * Gets the current date of today. Format: YYYY-MM-DD
  * @returns {string}
  */
-function getCurrentDate() {
-    var fullDate = new Date()
-    //Thu Otc 15 2014 17:25:38 GMT+1000 {}
-    //convert month to 2 digits
-    var twoDigitMonth = fullDate.getMonth();
-    if (twoDigitMonth < 10) {
-        twoDigitMonth = "0" + twoDigitMonth;
-    }
-    //convert day to 2 digits
-    var twoDigitDay = fullDate.getDate();
-    if (twoDigitDay < 10) {
-        twoDigitDay = "0" + twoDigitDay;
-    }
-    var currentDate = fullDate.getFullYear() + "-"  + twoDigitMonth + "-"  +  twoDigitDay;
-    return currentDate;
-}
 
+var utilities = (function($) {
+
+    function publicGetCurrentDate() {
+        var fullDate = new Date()
+        //Thu Otc 15 2014 17:25:38 GMT+1000 {}
+        //convert month to 2 digits
+        var twoDigitMonth = fullDate.getMonth();
+        if (twoDigitMonth < 10) {
+            twoDigitMonth = "0" + twoDigitMonth;
+        }
+        //convert day to 2 digits
+        var twoDigitDay = fullDate.getDate();
+        if (twoDigitDay < 10) {
+            twoDigitDay = "0" + twoDigitDay;
+        }
+        var currentDate = fullDate.getFullYear() + "-"  + twoDigitMonth + "-"  +  twoDigitDay;
+        return currentDate;
+    }
+
+    /**
+     * Sets the css style
+     * @returns {void}
+     */
+    function publicSetStyle(style) {
+        if ("StyleOrange" == style) {
+            $(".style").attr('href', "css/styleOrange.css");
+        } else if ("StyleBlackWhite" == style) {
+            $(".style").attr('href', "css/styleBlackWhite.css");
+        } else {
+            /* Default style */
+            $(".style").attr('href', "css/styleOrange.css");
+        }
+    }
+
+    return {
+        getCurrentDate: publicGetCurrentDate,
+        setStyle: publicSetStyle
+    }
+
+})(jQuery);
 /**
  *  Extend jQuery with the function getUrlVars to read the url parameters
  */

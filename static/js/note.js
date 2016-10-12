@@ -6,6 +6,7 @@ var noteRepo = (function($) {
     var showOnlyFinished = false;
     var currentFilter = null;
 
+
     /**
      * This function compares two nodes by the created date
      * @param {note} note object

@@ -6,7 +6,8 @@ var noteDataStorage = (function() {
     "use strict"
 
     function DataStorage() {
-        this.storageKey = "notes";
+        this.storageKey = "notes"
+        this.settingsKey = "settings";
     }
 
     /**
@@ -32,6 +33,23 @@ var noteDataStorage = (function() {
         return notes; //For debug reason
     }
 
+    /**
+     * Save the settings
+     * @param {settings} Settings object
+     * @returns {void}
+     */
+    function publicSaveSettings(settings) {
+        return localStorage.setItem("settings", JSON.stringify(settings));
+    }
+
+    /**
+     * Reads the settings
+     * @returns {settings}
+     */
+    function publicLoadSettings() {
+        return JSON.parse(localStorage.getItem("settings"));
+    }
+
     DataStorage.prototype.loadNotesFromStorage = function() {
         return JSON.parse(localStorage.getItem(storageKey));
     }
@@ -43,6 +61,8 @@ var noteDataStorage = (function() {
     return {
         saveNoteList : publicSaveNoteList,
         readNoteList : publicReadNoteList,
+        saveSettings : publicSaveSettings,
+        loadSettings  : publicLoadSettings
     };
 
 })();

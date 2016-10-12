@@ -2,7 +2,6 @@ html {
 	font-family: "Open Sans", sans-serif;
 }
 
-
 h1 {
 	margin: 10px 10px 10px 10px;
 	flex: 0 1 auto;	
@@ -12,7 +11,6 @@ h1 {
 header {
 	display: flex;
     flex-flow: row;
-	background:  #FFAF0A;/*#f3f3f3;*/
 	margin: 50px 50px 0px 50px;
 	height: 71px;
 }
@@ -20,7 +18,6 @@ header {
 main {	
 	background: #f3f3f3;
 	margin: 0px 50px 0px 50px;
-  /*  min-width: 340px;*/
 }
 
 p {
@@ -34,7 +31,7 @@ input[type="text"], input[type="number"], input[type="date"], textArea {
 	width:50%;
 }
 
-input[type="checkbox" i] {
+input[type="checkbox"] {
     margin-left: 0px;
 }
 
@@ -55,36 +52,18 @@ form {
 	padding: 50px 50px 50px 50px;
 }
 
-/* Button Styles */
 .btn {
-	box-shadow:inset 0px 1px 0px 0px #97c4fe;
-	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
-	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
-	background-color:#3d94f6;
-	border-radius:6px;
-	border:1px solid #337fed;
-	display:inline-block;
-	cursor:pointer;
-	color:#ffffff;
-	font-family:Arial;
-	font-size:15px;
-	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
 	text-shadow:0px 1px 0px #1570cd;
 	margin: 10px 10px 10px 0px;
 	flex: 0 1 auto;
 }
-.btn:hover {
-	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
-	background-color:#1e62d0;
-}
+
 .btn:active {
 	position:relative;
 	top:1px;
 }
-
-
 
 footer {
 	padding: 10px;

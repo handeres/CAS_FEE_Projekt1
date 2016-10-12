@@ -13,6 +13,9 @@
          */
         function init() {
 
+            var locSettings = noteDataStorage.loadSettings();
+            utilities.setStyle(locSettings.currentStyle);
+
             $("form").on('submit', saveClickEventHandler);
             $("#cancel").on('click', goBackEventHandler);
             $("#done").on('click', finishedEventHandler);
@@ -85,7 +88,6 @@
                 $("#finishedDate").val("");
             }
         }
-
 
         /**
          * Goes back to the main page

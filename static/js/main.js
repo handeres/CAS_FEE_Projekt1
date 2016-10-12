@@ -5,9 +5,9 @@
 
     "use strict"
 
-
     $(function() {
 
+        var settings = {currentFilter : null, showOnlyFinished : false, currentStyle: "StyleOrange"};
         /** 
          *  Register Handlebar Helperfunction to build a for loop 
          */
@@ -23,7 +23,10 @@
          *  Read notes from persistance and create html view
          */
         function init() {
-            /* Read note list from the persistance */
+
+            /* Read the UI Settings */
+            settings = loadUISettingsFromStorage();
+
             var notes = noteRepo.getAll();
             if (null != notes) {
                 createNoteList(notes);
@@ -52,64 +55,95 @@
             var data = $(this).data();
             //Set all button backgrounds to default
             $(".filters").children().css({'background':'#3d94f6'});
-            //$(".filters").children().toggleClass('btn_defaultBackground');
-            //$(".filters").children().addClass('btn_inactive');
-            //Set selected target to red
             $(event.target).css({'background':'red'});
-           // $(event.target).toggleClass('btn_active');
-            //$(event.target.className +  " .btn").toggleClass('btn_background');
             if (null != data) {
-                switch(data.filtertype) {
-                    case "createdDate":
-                        noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
-                        break;
-                    case "finishedDate":
-                        noteRepo.setFilter(noteRepo.compareNotesByFinishUntil);
-                        break;
-                    case "importance":
-                        noteRepo.setFilter(noteRepo.compareNotesByImportance);
-                        break;
-                    default:
-                        noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
-                        break;
-                }
-                return createNoteList(noteRepo.getAll());
+                createFilteredList(data.filtertype)
             }
+        }
+
+        function createFilteredList(filterType) {
+            switch(filterType) {
+                case "createdDate":
+                    noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
+                    break;
+                case "finishedDate":
+                    noteRepo.setFilter(noteRepo.compareNotesByFinishUntil);
+                    break;
+                case "importance":
+                    noteRepo.setFilter(noteRepo.compareNotesByImportance);
+                    break;
+                default:
+                    noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
+                    break;
+            }
+            settings.currentFilter = filterType;
+            saveSettingsToStorage();
+            createNoteList(noteRepo.getAll());
         }
 
         /**
          *  This function is an button event handler to change the page to the new note
          */
-        function newNoteClickEventHandler(event) {
+        function newNoteClickEventHandler() {
             window.location.href='../notes.html';
         }
 
         /**
          *  This function is an button event handler to change the page to the edit note
          */
-        function editNoteClickEventHandler(event) {
+        function editNoteClickEventHandler() {
             var data = $(this).data();
             window.location.href='../notes.html?Page=edit&Key=' + data.uniqueid;
         }
 
-        function finishedClickEventHandler(event) {
+        /**
+         *  This function is an button event handler for the finished filter
+         */
+        function finishedClickEventHandler() {
             /* Change backround color */
             $(".showFinished .btn").toggleClass('btn_active');
             
             noteRepo.toggleShowOnlyFinished();
+            /* Save the settings */
+            settings.showOnlyFinished = !settings.showOnlyFinished;
+            saveSettingsToStorage();
             createNoteList(noteRepo.getAll());
         }
-        
-        function changeStyleEventHandler(event) {
+
+        /**
+         *  This function is an selection event handler to change the style
+         */
+        function changeStyleEventHandler() {
             var selectedStyle = $('.styleSelect option:selected').val();
-            if ("StyleOrange" == selectedStyle) {
-                $(".style").attr('href', "css/styleOrange.css");
-            } else if ("StyleBlackWhite" == selectedStyle) {
-                $(".style").attr('href', "");
-            } else {
-                /* Default style */
-                $(".style").attr('href', "css/styleOrange.css");
-            }                
+            utilities.setStyle(selectedStyle);
+            /* Save the settings */
+            settings.currentStyle = selectedStyle;
+            saveSettingsToStorage();
+        }
+
+        /* Load current UI settings from storage */
+        function loadUISettingsFromStorage() {
+            var locSettings = noteDataStorage.loadSettings();
+            if (null === locSettings) {
+                /* First time settings are read. Save it first */
+                noteDataStorage.saveSettings(settings);
+                locSettings = noteDataStorage.loadSettings();
+            }
+
+            $(".styleSelect select").val(locSettings.currentStyle);
+            changeStyleEventHandler();
+            if (true === locSettings.showOnlyFinished) {
+                finishedClickEventHandler();
+            }
+            if (undefined != locSettings.currentFilter)  {
+                createFilteredList(locSettings.currentFilter)
+                $("#" + locSettings.currentFilter).css({'background':'red'});
+            }
+            return locSettings;
+        }
+
+        function saveSettingsToStorage() {
+            noteDataStorage.saveSettings(settings);
         }
 
         init();
