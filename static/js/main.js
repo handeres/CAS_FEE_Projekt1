@@ -7,7 +7,6 @@
 
     $(function() {
 
-        var settings = {currentFilter : null, showOnlyFinished : false, currentStyle: "StyleOrange"};
         /** 
          *  Register Handlebar Helperfunction to build a for loop 
          */
@@ -25,7 +24,7 @@
         function init() {
 
             /* Read the UI Settings */
-            settings = loadUISettingsFromStorage();
+            loadUISettingsFromStorage();
 
             var notes = noteRepo.getAll();
             if (null != notes) {
@@ -76,8 +75,7 @@
                     noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
                     break;
             }
-            settings.currentFilter = filterType;
-            saveSettingsToStorage();
+            settingsData.setCurrentFilter(filterType);
             createNoteList(noteRepo.getAll());
         }
 
@@ -102,11 +100,9 @@
         function finishedClickEventHandler() {
             /* Change backround color */
             $(".showFinished .btn").toggleClass('btn_active');
-            
             noteRepo.toggleShowOnlyFinished();
             /* Save the settings */
-            settings.showOnlyFinished = !settings.showOnlyFinished;
-            saveSettingsToStorage();
+            settingsData.setShowOnlyFinished(!settingsData.getShowOnlyFinished());
             createNoteList(noteRepo.getAll());
         }
 
@@ -117,33 +113,24 @@
             var selectedStyle = $('.styleSelect option:selected').val();
             utilities.setStyle(selectedStyle);
             /* Save the settings */
-            settings.currentStyle = selectedStyle;
-            saveSettingsToStorage();
+            settingsData.setCurrentStyle(selectedStyle);
         }
 
         /* Load current UI settings from storage */
         function loadUISettingsFromStorage() {
-            var locSettings = noteDataStorage.loadSettings();
-            if (null === locSettings) {
-                /* First time settings are read. Save it first */
-                noteDataStorage.saveSettings(settings);
-                locSettings = noteDataStorage.loadSettings();
-            }
+            settingsData.load();
 
-            $(".styleSelect select").val(locSettings.currentStyle);
+            $(".styleSelect select").val(settingsData.getCurrentStyle());
             changeStyleEventHandler();
-            if (true === locSettings.showOnlyFinished) {
+            if (true === settingsData.getShowOnlyFinished()) {
                 finishedClickEventHandler();
             }
-            if (undefined != locSettings.currentFilter)  {
-                createFilteredList(locSettings.currentFilter)
-                $("#" + locSettings.currentFilter).css({'background':'red'});
-            }
-            return locSettings;
-        }
 
-        function saveSettingsToStorage() {
-            noteDataStorage.saveSettings(settings);
+            var currentFilter = settingsData.getCurrentFilter()
+            if (undefined != currentFilter)  {
+                createFilteredList(currentFilter)
+                $("#" + currentFilter).css({'background':'red'});
+            }
         }
 
         init();

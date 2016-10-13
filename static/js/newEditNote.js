@@ -13,8 +13,9 @@
          */
         function init() {
 
-            var locSettings = noteDataStorage.loadSettings();
-            utilities.setStyle(locSettings.currentStyle);
+            /* Current style is saved in the settings */
+            settingsData.load();
+            utilities.setStyle(settingsData.getCurrentStyle());
 
             $("form").on('submit', saveClickEventHandler);
             $("#cancel").on('click', goBackEventHandler);
@@ -96,7 +97,6 @@
         function goBackEventHandler() {
             window.history.back();
         }
-
 
         init();
     });
