@@ -46,6 +46,7 @@ var utilities = (function($) {
     }
 
 })(jQuery);
+
 /**
  *  Extend jQuery with the function getUrlVars to read the url parameters
  */

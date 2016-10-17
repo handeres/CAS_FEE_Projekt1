@@ -3,9 +3,7 @@
  */
 var noteRepo = (function($) {
 
-    var showOnlyFinished = false;
-    var currentFilter = null;
-
+    var dataStorage = noteDataStorage.createDataStorage();
 
     /**
      * This function compares two nodes by the created date
@@ -76,29 +74,11 @@ var noteRepo = (function($) {
      * @param {note []} Notes array
      * @returns {note []} filtered array list
      */
-    function readNodeListFiltered(notesList) {
+    function publicReadNodeListFiltered(notesList) {
         var filterdNoteList = $.grep(notesList, function(note, i){
             return (note.done === true);
         });
         return filterdNoteList;
-    }
-
-    /**
-     * Sets the current filter function
-     * @param {function} Filter function
-     * @returns {note}
-     */
-    function publicSetFilter(filter) {
-        currentFilter = filter;
-    }
-
-    /**
-     * Sets the current filter function
-     * @param {function} Filter function
-     * @returns {note}
-     */
-    function publicToggleShowOnlyFinished() {
-        showOnlyFinished = !showOnlyFinished;
     }
 
     /**
@@ -118,15 +98,13 @@ var noteRepo = (function($) {
         }
         return null;
     }
-
-
+    
     /**
      * Saves a  note to the note list
      * @param {note} Note object to be saved
      * @returns {void}
      */
     function publicSaveNote(note) {
-
         /* Check if it is a new entry */
         if (   (undefined === note.uniqueID)
             || ("" === note.uniqueID)) {
@@ -146,13 +124,12 @@ var noteRepo = (function($) {
      * @returns {void}
      */
     function createNote(note) {
-
         var notes = publicGetAll();
         if (null == notes) {
             notes = [];
         }
         notes.push(note);
-        noteDataStorage.saveNoteList(notes);
+        dataStorage.saveNoteList(notes);
     }
 
     /**
@@ -170,7 +147,7 @@ var noteRepo = (function($) {
                 }
             }
         }
-        noteDataStorage.saveNoteList(notes);
+        dataStorage.saveNoteList(notes);
     }
 
     /**
@@ -178,26 +155,17 @@ var noteRepo = (function($) {
      * @returns {note[]} Note array
      */
     function publicGetAll() {
-        var notes = noteDataStorage.readNoteList();
-        if (true === showOnlyFinished) {
-            notes = readNodeListFiltered(notes);
-        }
-        if (null != currentFilter) {
-            return notes.sort(currentFilter);
-        } else {
-            return notes;
-        }
+       return dataStorage.readNoteList();
     }
 
     return {
         compareNotesByCreatedDate : publicCompareNotesByCreatedDate,
         compareNotesByFinishUntil : publicCompareNotesByFinishUntil,
         compareNotesByImportance: publicCompareNotesByImportance,
+        readNodeListFiltered : publicReadNodeListFiltered,
         saveNote : publicSaveNote,
         getNoteByUniqueID: publicGetNoteByUniqueID,
         getAll : publicGetAll,
-        setFilter : publicSetFilter,
-        toggleShowOnlyFinished : publicToggleShowOnlyFinished
     };
 
 })(jQuery);

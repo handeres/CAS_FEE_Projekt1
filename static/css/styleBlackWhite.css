@@ -3,45 +3,14 @@ html {
 	font-family: "Open Sans", sans-serif;
 }
 
-
-header {
+header, main {
 	background:  #f3f3f3;
-
-}
-
-main {
-	background: #f3f3f3;
-}
-
-.btn {
-	
-}
-
-.btn_inactive {
-   
-}
-
-.btn:hover {
-
-}
-
-.btn_active:hover{ 
-  
 }
 
 .btn_active{
-   background: red;
+   background:#bdbdbd;
 }
 
-.btn_selected:hover {
-	
-}
-
-.table-row {
-
-}
-
-/* Table Styles */
 table {
 	width: 100%;
 }

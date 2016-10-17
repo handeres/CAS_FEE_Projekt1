@@ -22,14 +22,10 @@
          *  Read notes from persistance and create html view
          */
         function init() {
-
             /* Read the UI Settings */
             loadUISettingsFromStorage();
+            renderNoteList();
 
-            var notes = noteRepo.getAll();
-            if (null != notes) {
-                createNoteList(notes);
-            }
             $(".filters").on('click', 'button', filterClickEventHandler);
             $(".showFinished .btn").on('click', finishedClickEventHandler);
             $(".newNote").on('click', newNoteClickEventHandler);
@@ -46,48 +42,80 @@
             $(".styleSelect select").on('change', changeStyleEventHandler);          
         }
 
-
         /**
          *  This function is an button event handler for the filter functionality
          */
         function filterClickEventHandler(event) {
             var data = $(this).data();
             //Set all button backgrounds to default
-            $(".filters").children().css({'background':'#3d94f6'});
-            $(event.target).css({'background':'red'});
+            //With toggleClass function not possible. add- and removeClass must be used
+            $(".filters .btn").removeClass('btn_active');
+            $(event.target).addClass('btn_active');
             if (null != data) {
-                createFilteredList(data.filtertype)
+                createFilteredList(data.filtertype);
             }
-        }
-
-        function createFilteredList(filterType) {
-            switch(filterType) {
-                case "createdDate":
-                    noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
-                    break;
-                case "finishedDate":
-                    noteRepo.setFilter(noteRepo.compareNotesByFinishUntil);
-                    break;
-                case "importance":
-                    noteRepo.setFilter(noteRepo.compareNotesByImportance);
-                    break;
-                default:
-                    noteRepo.setFilter(noteRepo.compareNotesByCreatedDate);
-                    break;
-            }
-            settingsData.setCurrentFilter(filterType);
-            createNoteList(noteRepo.getAll());
         }
 
         /**
-         *  This function is an button event handler to change the page to the new note
+         * This function creates the filtered list
+         * @param {string} Type of filter
+         * @returns {void}
+         */
+        function createFilteredList(filterType) {
+            settingsData.setCurrentFilter(filterType);
+            renderNoteList();
+        }
+
+        /**
+         *  This function gets the filter function by the name
+         *  @param {string} Type of filter
+         *  @returns {function}
+         */
+        function getFilterByType(filterType) {
+            switch(filterType) {
+                case "finishedDate":
+                    return noteRepo.compareNotesByFinishUntil;
+                case "createdDate":
+                    return noteRepo.compareNotesByCreatedDate;
+                case "importance":
+                    return noteRepo.compareNotesByImportance;
+                default:
+                    return null;
+            }
+        }
+
+        /**
+         *  This function creates the note list html depending on the current filters
+         */
+        function renderNoteList() {
+            var notes  = noteRepo.getAll();
+            if (true === settingsData.getShowOnlyFinished()) {
+                notes = noteRepo.readNodeListFiltered(notes);
+            }
+            else {
+                notes = noteRepo.getAll();
+            }
+            var filter = getFilterByType(settingsData.getCurrentFilter());
+            if (null != filter) {
+                notes = notes.sort(filter);
+            }
+            for (var index in notes) {
+                if (true === notes[index].done) {
+                    notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();
+                }
+            }
+            createNoteList(notes);
+        }
+
+        /**
+         *  This function is an button event handler to change the page to the new note site
          */
         function newNoteClickEventHandler() {
             window.location.href='../notes.html';
         }
 
         /**
-         *  This function is an button event handler to change the page to the edit note
+         *  This function is an button event handler to change the page to the edit note site
          */
         function editNoteClickEventHandler() {
             var data = $(this).data();
@@ -99,11 +127,17 @@
          */
         function finishedClickEventHandler() {
             /* Change backround color */
-            $(".showFinished .btn").toggleClass('btn_active');
-            noteRepo.toggleShowOnlyFinished();
+            setFinishedButton();
             /* Save the settings */
             settingsData.setShowOnlyFinished(!settingsData.getShowOnlyFinished());
-            createNoteList(noteRepo.getAll());
+            renderNoteList();
+        }
+
+        /**
+         *  This function toggles the color of the button
+         */
+        function setFinishedButton() {
+            $(".showFinished .btn").toggleClass('btn_active');
         }
 
         /**
@@ -116,20 +150,21 @@
             settingsData.setCurrentStyle(selectedStyle);
         }
 
-        /* Load current UI settings from storage */
+        /**
+         * Load current UI settings from storage
+         */
         function loadUISettingsFromStorage() {
             settingsData.load();
 
             $(".styleSelect select").val(settingsData.getCurrentStyle());
             changeStyleEventHandler();
-            if (true === settingsData.getShowOnlyFinished()) {
-                finishedClickEventHandler();
+            var showOnlyFinished = settingsData.getShowOnlyFinished();
+            if (true === showOnlyFinished) {
+                setFinishedButton();
             }
-
             var currentFilter = settingsData.getCurrentFilter()
             if (undefined != currentFilter)  {
-                createFilteredList(currentFilter)
-                $("#" + currentFilter).css({'background':'red'});
+                $("#" + currentFilter).addClass('btn_active');
             }
         }
 

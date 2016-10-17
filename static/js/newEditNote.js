@@ -12,7 +12,6 @@
          * @returns {void}
          */
         function init() {
-
             /* Current style is saved in the settings */
             settingsData.load();
             utilities.setStyle(settingsData.getCurrentStyle());
@@ -21,9 +20,14 @@
             $("#cancel").on('click', goBackEventHandler);
             $("#done").on('click', finishedEventHandler);
 
-            /* Same page used for create note and edit note.
-             * Title is dynamically.
-             */
+            setTitle();
+        }
+
+        /**
+         * Same page used for create note and edit note.
+         * Title is dynamically.
+         */
+        function setTitle() {
             var arlparameters = $.getUrlVars();
             if (null != arlparameters) {
                 if ("edit" == arlparameters.Page) {

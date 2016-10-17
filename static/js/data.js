@@ -5,64 +5,54 @@ var noteDataStorage = (function() {
 
     "use strict"
 
-    function DataStorage() {
-        this.storageKey = "notes"
-        this.settingsKey = "settings";
-    }
+    class DataStorage {
 
-    /**
-     * Saves note list to the storage.
-     * @param {note[]} Note object arry
-     * @returns {void}
-     */
-    function publicSaveNoteList(notList) {
-        return localStorage.setItem("notes", JSON.stringify(notList));
-    }
-
-    /**
-     * Reads the note object array
-     * @returns {note[]}
-     */
-    function publicReadNoteList() {
-        var notes = JSON.parse(localStorage.getItem("notes"));//this.prototype.loadNotesFromStorage();
-        for (var index in notes) {
-            if (true === notes[index].done) {
-                notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();
-            }
+        constructor() {
+            this.storageKey  = "notes"
+            this.settingsKey = "settings";
         }
-        return notes; //For debug reason
-    }
 
-    /**
-     * Save the settings
-     * @param {settings} Settings object
-     * @returns {void}
-     */
-    function publicSaveSettings(settings) {
-        return localStorage.setItem("settings", JSON.stringify(settings));
-    }
+        /**
+         * Saves note list to the storage.
+         * @param {note[]} Note object arry
+         * @returns {void}
+         */
+        saveNoteList(notList) {
+            return localStorage.setItem(this.storageKey, JSON.stringify(notList));
+        };
 
-    /**
-     * Reads the settings
-     * @returns {settings}
-     */
-    function publicLoadSettings() {
-        return JSON.parse(localStorage.getItem("settings"));
-    }
+        /**
+         * Reads the note object array
+         * @returns {note[]}
+         */
+        readNoteList() {
+            return JSON.parse(localStorage.getItem(this.storageKey));
+        };
 
-    DataStorage.prototype.loadNotesFromStorage = function() {
-        return JSON.parse(localStorage.getItem(storageKey));
-    }
+        /**
+         * Save the settings
+         * @param {settings} Settings object
+         * @returns {void}
+         */
+        saveSettings(settings) {
+            return localStorage.setItem(this.settingsKey, JSON.stringify(settings));
+        }
 
-     DataStorage.prototype.saveNotesToStorage = function(noteList) {
-        localStorage.setItem(storageKey, JSON.stringify(notList));
+        /**
+         * Reads the settings
+         * @returns {settings}
+         */
+        loadSettings() {
+            return JSON.parse(localStorage.getItem(this.settingsKey));
+        }
+
+    };
+
+    function publicCreateDataStorage() {
+        return new DataStorage();
     }
 
     return {
-        saveNoteList : publicSaveNoteList,
-        readNoteList : publicReadNoteList,
-        saveSettings : publicSaveSettings,
-        loadSettings  : publicLoadSettings
-    };
-
+        createDataStorage: publicCreateDataStorage
+    }
 })();

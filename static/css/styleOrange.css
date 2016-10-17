@@ -59,7 +59,6 @@ main {
 }
 
 .btn_selected:hover {
-	/*background:linear-gradient(to bottom, #3d94f6 5%, red 100%);*/
     background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
 	background-color:#1e62d0;
 	background:red; 
@@ -70,7 +69,6 @@ main {
 	border-collapse: collapse;
 }
 
-/* Table Styles */
 table {
 	width: 100%;
 }

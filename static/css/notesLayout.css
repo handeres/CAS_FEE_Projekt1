@@ -2,6 +2,11 @@ html {
 	font-family: "Open Sans", sans-serif;
 }
 
+#pageWrapper {
+	min-width: 610px;
+}
+
+
 h1 {
 	margin: 10px 10px 10px 10px;
 	flex: 0 1 auto;	

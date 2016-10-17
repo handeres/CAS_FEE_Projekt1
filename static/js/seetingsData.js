@@ -6,13 +6,14 @@
 var settingsData = (function($) {
 
     var settingType = {currentFilter: null, showOnlyFinished: false, currentStyle: "StyleOrange"};
+    var dataStorage = noteDataStorage.createDataStorage();
 
     function publicLoad() {
-        var locSettings = noteDataStorage.loadSettings();
+        var locSettings = dataStorage.loadSettings();
         if (null === locSettings) {
             /* First time settings are read. Save it first */
-            noteDataStorage.saveSettings(settingType);
-            settingType = noteDataStorage.loadSettings();
+            dataStorage.saveSettings(settingType);
+            settingType = dataStorage.loadSettings();
         }
         else {
             settingType = locSettings;
@@ -21,21 +22,21 @@ var settingsData = (function($) {
 
     function publicSetCurrentFilter(currentFilter) {
         settingType.currentFilter = currentFilter;
-        noteDataStorage.saveSettings(settingType);
+        dataStorage.saveSettings(settingType);
     }
 
     function publicSetShowOnlyFinished(showOnlyFinished) {
         settingType.showOnlyFinished = showOnlyFinished;
-        noteDataStorage.saveSettings(settingType);
+        dataStorage.saveSettings(settingType);
     }
 
     function publicSetCurrentStyle(currentStyle) {
         settingType.currentStyle = currentStyle;
-        noteDataStorage.saveSettings(settingType);
+        dataStorage.saveSettings(settingType);
     }
 
     function publicGetCurrentFilter() {
-        return settingType.currentStyle;
+        return settingType.currentFilter;
     }
 
     function publicGetShowOnlyFinished() {
