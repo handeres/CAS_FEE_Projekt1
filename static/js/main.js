@@ -144,7 +144,6 @@
          *  This function toggles the color of the button
          */
         function setFinishedButton() {
-            //$(".showFinished .btn").toggleClass('btn_active');
 			if (true === settingsData.getShowOnlyFinished()) {            
 				$(".showFinished .btn").text("Hide Finished");
             }
