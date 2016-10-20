@@ -48,6 +48,10 @@ var noteDataStorage = (function() {
 
     };
 
+	/**
+	 * Creates a DataStorage object
+	 * @returns {DataStorage}
+	 */
     function publicCreateDataStorage() {
         return new DataStorage();
     }

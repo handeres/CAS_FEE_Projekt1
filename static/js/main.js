@@ -29,6 +29,7 @@
             $(".filters").on('click', 'button', filterClickEventHandler);
             $(".showFinished .btn").on('click', finishedClickEventHandler);
             $(".newNote").on('click', newNoteClickEventHandler);
+			$(".styleSelect select").on('change', changeStyleEventHandler);
         }
 
         /**
@@ -38,8 +39,8 @@
             var createNodeList = Handlebars.compile($("#note-template").html());
             $(".noteList").empty();
             $(".noteList").append(createNodeList(notesList));
-            $(".editNote").on('click', editNoteClickEventHandler);            
-            $(".styleSelect select").on('change', changeStyleEventHandler);          
+            $(".editNote").on('click', editNoteClickEventHandler);                      
+			$(".finishedNote").on('change', finishedNoteClickEventHandler);			
         }
 
         /**
@@ -47,9 +48,8 @@
          */
         function filterClickEventHandler(event) {
             var data = $(this).data();
-            //Set all button backgrounds to default
-            //With toggleClass function not possible. add- and removeClass must be used
-            $(".filters .btn").removeClass('btn_active');
+            /* Set all button backgrounds to default */
+            $(".filters .btn").removeClass('btn_active');			
             $(event.target).addClass('btn_active');
             if (null != data) {
                 createFilteredList(data.filtertype);
@@ -88,12 +88,14 @@
          *  This function creates the note list html depending on the current filters
          */
         function renderNoteList() {
-            var notes  = noteRepo.getAll();
+            var notes = noteRepo.readNodeListFiltered();
             if (true === settingsData.getShowOnlyFinished()) {
-                notes = noteRepo.readNodeListFiltered(notes);
+                notes = noteRepo.getAll();
+				$(".showFinished .btn").text("Show All");
             }
             else {
-                notes = noteRepo.getAll();
+                notes = noteRepo.readNodeListFiltered();
+				$(".showFinished .btn").text("Show Finished");
             }
             var filter = getFilterByType(settingsData.getCurrentFilter());
             if (null != filter) {
@@ -118,8 +120,8 @@
          *  This function is an button event handler to change the page to the edit note site
          */
         function editNoteClickEventHandler() {
-            var data = $(this).data();
-            window.location.href='../notes.html?Page=edit&Key=' + data.uniqueid;
+			var uniqueId = $(this).closest('.table-row').data('uniqueid');
+            window.location.href='../notes.html?Page=edit&Key=' + uniqueId;
         }
 
         /**
@@ -149,13 +151,24 @@
             /* Save the settings */
             settingsData.setCurrentStyle(selectedStyle);
         }
+		
+		 /**
+         *  This function is a checkbox eventhandler and sets a note to done or to rework
+         */
+		function finishedNoteClickEventHandler() {
+			var uniqueId = $(this).closest('.table-row').data('uniqueid');
+			var done =	$(this).is(":checked");	
+			noteRepo.updateNoteMember(uniqueId, 'done', done);
+			noteRepo.updateNoteMember(uniqueId, 'finishedDate', new Date());		 
+			renderNoteList();
+		}
 
         /**
          * Load current UI settings from storage
          */
         function loadUISettingsFromStorage() {
             settingsData.load();
-
+			
             $(".styleSelect select").val(settingsData.getCurrentStyle());
             changeStyleEventHandler();
             var showOnlyFinished = settingsData.getShowOnlyFinished();

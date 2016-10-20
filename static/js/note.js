@@ -56,7 +56,6 @@ var noteRepo = (function($) {
      * @returns {bool}
      */
     function noteExists(note) {
-        // Read object array from local storage
         var notes = publicGetAll();
         if (null == notes) {
             return false;
@@ -74,9 +73,10 @@ var noteRepo = (function($) {
      * @param {note []} Notes array
      * @returns {note []} filtered array list
      */
-    function publicReadNodeListFiltered(notesList) {
-        var filterdNoteList = $.grep(notesList, function(note, i){
-            return (note.done === true);
+    function publicReadNodeListFiltered() {
+		var notes = publicGetAll();
+        var filterdNoteList = $.grep(notes, function(note, i){
+            return (note.done === false);
         });
         return filterdNoteList;
     }
@@ -98,6 +98,21 @@ var noteRepo = (function($) {
         }
         return null;
     }
+	
+	/**
+     * This function updates a note member value 
+     * @param {string} uniqueID of the note
+	 * @param {string} Name of the member
+	 * @param {object} Value for the member
+     * @returns {void}
+     */
+	function publicUpdateNoteMember(uniqueID, member, value) {
+		var note = publicGetNoteByUniqueID(uniqueID);
+		if (null != note) {
+			note[member] = value;
+			publicSaveNote(note);
+		}
+	}
     
     /**
      * Saves a  note to the note list
@@ -106,8 +121,8 @@ var noteRepo = (function($) {
      */
     function publicSaveNote(note) {
         /* Check if it is a new entry */
-        if (   (undefined === note.uniqueID)
-            || ("" === note.uniqueID)) {
+        if (  (undefined === note.uniqueID)
+			|| ("" === note.uniqueID)) {
             /* genarete a key if the entry is new created */
             note.uniqueID    = $.getUniqueID(10);
             note.createdDate = $.now();
@@ -166,6 +181,7 @@ var noteRepo = (function($) {
         saveNote : publicSaveNote,
         getNoteByUniqueID: publicGetNoteByUniqueID,
         getAll : publicGetAll,
+		updateNoteMember: publicUpdateNoteMember
     };
 
 })(jQuery);

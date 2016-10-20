@@ -40,7 +40,7 @@
         }
 
         /**
-         * Save click event handler. Saves the data to a storage
+         * Click event handler to save data to a storage
          * @returns {void}
          */
         function saveClickEventHandler(event) {
@@ -100,6 +100,7 @@
          */
         function goBackEventHandler() {
             window.history.back();
+			//windows.location = "index.html";
         }
 
         init();

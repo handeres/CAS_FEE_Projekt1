@@ -10,10 +10,10 @@
 
             <script id="note-template" type="text/x-handlebars-template">
            {{#each this}}
-           <div class="table-row">
+           <div class="table-row" data-uniqueID="{{uniqueID}}">
                <div class="text">
                    <input type="date" value="{{finishUntil}}" disabled>
-                   <input type="checkbox" name="Finished" {{#if done}}checked{{/if}} disabled>
+                   <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
                    <p class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</p>
                </div>
                <div>
@@ -26,7 +26,7 @@
                    <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>                   
                </div>             
                <div class="text">
-                   <button class="editNote btn" type="button" data-uniqueID="{{uniqueID}}">Edit</button>
+                   <button class="editNote btn" type="button">Edit</button>
                </div>
            </div>
            {{/each}}
@@ -61,9 +61,9 @@
          </div>
         <footer role="contentinfo">Designed by: Hannes Anderes</footer>
 
-   <script language="javascript" src="js/jquery/jquery-2.2.3.min.js"></script>
-   <script language="javascript" src="js/handlebars/handlebars.min.js"></script>
-   <script language="javascript" src="js/moment/moment.js"></script>
+   <script language="javascript" src="js/libs/jquery-2.2.3.min.js"></script>
+   <script language="javascript" src="js/libs/handlebars.min.js"></script>
+   <script language="javascript" src="js/libs/moment.js"></script>
    <script language="javascript" src="js/data.js"></script>
    <script language="javascript" src="js/seetingsData.js"></script>
    <script language="javascript" src="js/note.js"></script>
