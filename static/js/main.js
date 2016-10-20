@@ -36,11 +36,17 @@
          *  This function creates table rows from the handlebar template 'node-template'
          */
         function createNoteList(notesList) {
-            var createNodeList = Handlebars.compile($("#note-template").html());
-            $(".noteList").empty();
-            $(".noteList").append(createNodeList(notesList));
-            $(".editNote").on('click', editNoteClickEventHandler);                      
-			$(".finishedNote").on('change', finishedNoteClickEventHandler);			
+			if (notesList.length > 0) {
+				var createNodeList = Handlebars.compile($("#note-template").html());			
+				$(".noteList").empty();
+				$(".noteList").append(createNodeList(notesList));
+				$(".editNote").on('click', editNoteClickEventHandler);                      
+				$(".finishedNote").on('change', finishedNoteClickEventHandler);	
+			} else {
+				var noNotes = Handlebars.compile($("#no-note-template").html());
+				$(".noteList").empty();
+				$(".noteList").append(noNotes);
+			}
         }
 
         /**
@@ -90,13 +96,12 @@
         function renderNoteList() {
             var notes = noteRepo.readNodeListFiltered();
             if (true === settingsData.getShowOnlyFinished()) {
-                notes = noteRepo.getAll();
-				$(".showFinished .btn").text("Show All");
+                notes = noteRepo.getAll();		
             }
             else {
                 notes = noteRepo.readNodeListFiltered();
-				$(".showFinished .btn").text("Show Finished");
             }
+			setFinishedButton();
             var filter = getFilterByType(settingsData.getCurrentFilter());
             if (null != filter) {
                 notes = notes.sort(filter);
@@ -139,7 +144,13 @@
          *  This function toggles the color of the button
          */
         function setFinishedButton() {
-            $(".showFinished .btn").toggleClass('btn_active');
+            //$(".showFinished .btn").toggleClass('btn_active');
+			if (true === settingsData.getShowOnlyFinished()) {            
+				$(".showFinished .btn").text("Hide Finished");
+            }
+            else {
+				$(".showFinished .btn").text("Show All");
+            }
         }
 
         /**
@@ -159,7 +170,7 @@
 			var uniqueId = $(this).closest('.table-row').data('uniqueid');
 			var done =	$(this).is(":checked");	
 			noteRepo.updateNoteMember(uniqueId, 'done', done);
-			noteRepo.updateNoteMember(uniqueId, 'finishedDate', new Date());		 
+			noteRepo.updateNoteMember(uniqueId, 'finishedDate', new Date()); 
 			renderNoteList();
 		}
 
@@ -171,10 +182,7 @@
 			
             $(".styleSelect select").val(settingsData.getCurrentStyle());
             changeStyleEventHandler();
-            var showOnlyFinished = settingsData.getShowOnlyFinished();
-            if (true === showOnlyFinished) {
-                setFinishedButton();
-            }
+            setFinishedButton();
             var currentFilter = settingsData.getCurrentFilter()
             if (undefined != currentFilter)  {
                 $("#" + currentFilter).addClass('btn_active');

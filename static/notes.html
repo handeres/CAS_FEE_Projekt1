@@ -15,29 +15,29 @@
         </header>
         <main role="main">
             <form>  
-                <div class="noteInput">
+                <section class="noteInput">
                     <p>Title</p>
                     <input id="title" type="text" pattern=".{1,}" required/>
-                </div>
-                <div class="noteInput">
+                </section>
+                <section class="noteInput">
                     <p>Description</p>
                     <textarea rows="10" id="description" pattern=".{1,}" required></textarea>
-                </div>
-                <div class="noteInput">
+                </section>
+                <section class="noteInput">
                     <p>Importance</p>
                     <input id="importance" type="number" min="1" max="5" required/>
-                </div>
-                <div class="noteInput">
+                </section>
+                <section class="noteInput">
                     <p>Finish until</p>
                     <input id="date" type="date" required/>
-                </div>
-                <div class="noteInput">
+                </section>
+                <section class="noteInput">
                     <input id="done" type="checkbox">Finished!<br>
-                </div>
+                </section>
                 <input id="uniqueID" hidden> 
                 <input id="finishedDate" hidden> 
                 <input id="createdDate" hidden>  
-                <button id="save" class="btn" type="submit"  >Save</button>       
+                <button id="save" class="btn" type="submit">Save</button>       
                 <button id="cancel" class="btn" type="button">Cancel</button>                        
             </form>
         </main>

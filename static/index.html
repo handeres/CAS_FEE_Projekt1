@@ -6,61 +6,68 @@
             <title>Note Pro</title>
 
             <link rel="stylesheet" href="css/mainLayout.css">
-            <link class="style" rel="stylesheet" href="css/styleOrange.css">
+            <link class="style" rel="stylesheet" href="">
 
             <script id="note-template" type="text/x-handlebars-template">
            {{#each this}}
            <div class="table-row" data-uniqueID="{{uniqueID}}">
-               <div class="text">
-                   <input type="date" value="{{finishUntil}}" disabled>
+               <section class="text">
+                   <input type="date" value="{{finishUntil}}" disabled> 
                    <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
                    <p class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</p>
-               </div>
-               <div>
-                   <div class="output">
+               </section>
+               <section>
+                   <section class="output">
                        <p class="title">{{title}}</p>
                       {{#for importance}}
                       <img class="importance" src="img/lightning-icon.png">
                       {{/for}}
-                   </div>
+                   </section>
                    <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>                   
-               </div>             
-               <div class="text">
+               </section>             
+               <section class="text">
                    <button class="editNote btn" type="button">Edit</button>
-               </div>
+               </section>
            </div>
-           {{/each}}
+           {{/each}}		  
         </script>
+		<script id="no-note-template" type="text/x-handlebars-template">
+			 <div class="table-row">
+               <section class="text">
+				<p>No notes found!</p>
+			   </section>
+			 </div>
+		</script>
    </head>
    <body>
        <div id="pageWrapper">
            <header>
-               <div class="newNote">
+               <section class="newNote">
                    <button class="btn" type="button">Create New Note</button>
-               </div>
-               <div class="styleSelect">
+               </section>
+               <section class="styleSelect">
                    <select>
                        <option value="StyleOrange">Orange-Style</option>
                        <option value="StyleBlackWhite">BlackWhite-Style</option>
                    </select>
-               </div>
+               </section>
            </header>
            <main role="main">
-                  <div class="filterOptionen ">
+                  <section class="filterOptionen ">
                        <section class="filters">
-                           <button class="btn" id="finishedDate"type="button" data-filterType="finishedDate">By finish Date</button>
-                           <button class="btn" id="createdDate" type="button" data-filterType="createdDate">By created Date</button>
-                           <button class="btn" id="importance"  type="button" data-filterType="importance">By Importance</button>
+                           <button class="btn" type="button" data-filterType="finishedDate">By Finish Date</button>
+                           <button class="btn" type="button" data-filterType="createdDate">By Created Date</button>
+                           <button class="btn" type="button" data-filterType="importance">By Importance</button>
                        </section>
-                       <div class="showFinished">
+                       <section class="showFinished">
                            <button class="btn" type="button">Show finished</button>
-                       </div>
-                  </div>
+                       </section>
+                  </section>
                   <table class="noteList"></table>
              </main>
+			 <footer role="contentinfo">Designed by: Hannes Anderes</footer>
          </div>
-        <footer role="contentinfo">Designed by: Hannes Anderes</footer>
-
+        
    <script language="javascript" src="js/libs/jquery-2.2.3.min.js"></script>
    <script language="javascript" src="js/libs/handlebars.min.js"></script>
    <script language="javascript" src="js/libs/moment.js"></script>

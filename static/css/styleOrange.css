@@ -3,10 +3,8 @@ html {
 	font-family: "Open Sans", sans-serif;
 }
 
-
-header {
+header, footer {
 	background:  #FFAF0A;
-
 }
 
 main {
