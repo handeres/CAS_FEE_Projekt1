@@ -5,6 +5,8 @@
 
 var settingsData = (function($) {
 
+    "use strict"
+
     var settingType = {currentFilter: null, showOnlyFinished: false, currentStyle: "StyleOrange"};
     var dataStorage = noteDataStorage.createDataStorage();
 

@@ -7,15 +7,15 @@
 
     $(function() {
 
-        /** 
-         *  Register Handlebar Helperfunction to build a for loop 
+        /**
+         *  Register Handlebar Helperfunction to build a for loop
          */
         Handlebars.registerHelper('for', function(count, options) {
-          var ret = "";
-          for(var i=0; i < count; i++) {
-            ret = ret + options.fn(count);
-          }
-          return ret;
+            var ret = "";
+            for(var i=0; i < count; i++) {
+                ret = ret + options.fn(count);
+            }
+            return ret;
         });
 
         /** 
@@ -27,7 +27,7 @@
             renderNoteList();
 
             $(".filters").on('click', 'button', filterClickEventHandler);
-            $(".showFinished .btn").on('click', finishedClickEventHandler);
+            $(".showFinished button").on('click', finishedClickEventHandler);
             $(".newNote").on('click', newNoteClickEventHandler);
 			$(".styleSelect select").on('change', changeStyleEventHandler);
         }
@@ -55,7 +55,7 @@
         function filterClickEventHandler(event) {
             var data = $(this).data();
             /* Set all button backgrounds to default */
-            $(".filters .btn").removeClass('btn_active');			
+            $(".filters button").removeClass('btn_active');
             $(event.target).addClass('btn_active');
             if (null != data) {
                 createFilteredList(data.filtertype);
@@ -94,7 +94,7 @@
          *  This function creates the note list html depending on the current filters
          */
         function renderNoteList() {
-            var notes = noteRepo.readNodeListFiltered();
+            var notes = {};
             if (true === settingsData.getShowOnlyFinished()) {
                 notes = noteRepo.getAll();		
             }
@@ -106,11 +106,11 @@
             if (null != filter) {
                 notes = notes.sort(filter);
             }
-            for (var index in notes) {
-                if (true === notes[index].done) {
-                    notes[index].relativeTimeDone = moment(notes[index].finishedDate).fromNow();
+            notes.forEach(function(note) {
+                if (true === note.done) {
+                    note.relativeTimeDone = moment(note.finishedDate).fromNow();
                 }
-            }
+            });
             createNoteList(notes);
         }
 
@@ -125,7 +125,7 @@
          *  This function is an button event handler to change the page to the edit note site
          */
         function editNoteClickEventHandler() {
-			var uniqueId = $(this).closest('.table-row').data('uniqueid');
+			var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
             window.location.href='../notes.html?Page=edit&Key=' + uniqueId;
         }
 
@@ -145,10 +145,10 @@
          */
         function setFinishedButton() {
 			if (true === settingsData.getShowOnlyFinished()) {            
-				$(".showFinished .btn").text("Hide Finished");
+				$(".showFinished button").text("Hide Finished");
             }
             else {
-				$(".showFinished .btn").text("Show All");
+				$(".showFinished button").text("Show All");
             }
         }
 
@@ -166,7 +166,7 @@
          *  This function is a checkbox eventhandler and sets a note to done or to rework
          */
 		function finishedNoteClickEventHandler() {
-			var uniqueId = $(this).closest('.table-row').data('uniqueid');
+			var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
 			var done =	$(this).is(":checked");	
 			noteRepo.updateNoteMember(uniqueId, 'done', done);
 			noteRepo.updateNoteMember(uniqueId, 'finishedDate', new Date()); 

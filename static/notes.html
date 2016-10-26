@@ -14,42 +14,44 @@
             <h1>New Note</h1>
         </header>
         <main role="main">
-            <form>  
-                <section class="noteInput">
-                    <p>Title</p>
-                    <input id="title" type="text" pattern=".{1,}" required/>
-                </section>
-                <section class="noteInput">
-                    <p>Description</p>
-                    <textarea rows="10" id="description" pattern=".{1,}" required></textarea>
-                </section>
-                <section class="noteInput">
-                    <p>Importance</p>
-                    <input id="importance" type="number" min="1" max="5" required/>
-                </section>
-                <section class="noteInput">
-                    <p>Finish until</p>
-                    <input id="date" type="date" required/>
-                </section>
-                <section class="noteInput">
-                    <input id="done" type="checkbox">Finished!<br>
-                </section>
-                <input id="uniqueID" hidden> 
-                <input id="finishedDate" hidden> 
-                <input id="createdDate" hidden>  
-                <button id="save" class="btn" type="submit">Save</button>       
-                <button id="cancel" class="btn" type="button">Cancel</button>                        
+            <form>
+                <div class="noteInput">
+                    <label for="title">Title</label>
+                    <input name="title" id="title" type="text" pattern=".{1,}" required>
+                </div>
+                <div class="noteInput">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="10" pattern=".{1,}" required></textarea>
+                </div>
+                <div class="noteInput">
+                    <label for="importance">Importance</label>
+                    <input name="importance" id="importance" type="number" min="1" max="5" required>
+                </div>
+                <div class="noteInput">
+                    <label for="date">Finish until</label>
+                    <input name="date" id="date" type="date" required>
+                </div>
+                <div class="noteInput">
+                    <label for="done">Finished!</label>
+                    <input name="done" id="done" type="checkbox">
+                </div>
+                <button id="save" type="submit">Save</button>
+                <button id="cancel" type="reset">Cancel</button>
+
+                <input id="uniqueID" hidden>
+                <input id="finishedDate" hidden>
+                <input id="createdDate" hidden>
             </form>
         </main>
 		<footer role="contentinfo">Designed by: Hannes Anderes</footer>
     </div>
 
-    <script language="javascript" src="js/libs/jquery-2.2.3.min.js"></script>
-    <script language="javascript" src="js/libs/moment.js"></script>
-    <script language="javascript" src="js/data.js"></script>
-    <script language="javascript" src="js/seetingsData.js"></script>
-    <script language="javascript" src="js/note.js"></script>
-    <script language="javascript" src="js/newEditNote.js"></script>
-    <script language="javascript" src="js/utilities.js"></script>
+    <script src="js/libs/jquery-2.2.3.min.js"></script>
+    <script src="js/libs/moment.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/seetingsData.js"></script>
+    <script src="js/note.js"></script>
+    <script src="js/newEditNote.js"></script>
+    <script src="js/utilities.js"></script>
     </body>
 </html>

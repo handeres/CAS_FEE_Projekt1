@@ -3,6 +3,8 @@
  */
 var noteRepo = (function($) {
 
+    "use strict"
+
     var dataStorage = noteDataStorage.createDataStorage();
 
     /**
@@ -49,25 +51,6 @@ var noteRepo = (function($) {
         }
         return 0;
     }
-
-    /**
-     * Checks if a note already exists
-     * @param {note} note object
-     * @returns {bool}
-     */
-    function noteExists(note) {
-        var notes = publicGetAll();
-        if (null == notes) {
-            return false;
-        }
-        for (var index in notes) {
-            if (notes[index].uniqueID == note.uniqueID) {
-                return true;
-            }
-        }
-        return false;
-    }
-
     /**
      * Saves a new note to the note list
      * @param {note []} Notes array
@@ -91,12 +74,13 @@ var noteRepo = (function($) {
         if (null == notes) {
             return null;
         }
-        for (var index in notes) {
-            if (notes[index].uniqueID === uniqueID) {
-                return notes[index];
+        var result;
+        notes.forEach(function(locNote) {
+            if (locNote.uniqueID === uniqueID) {
+                result = locNote
             }
-        }
-        return null;
+        });
+        return result;
     }
 	
 	/**
@@ -155,12 +139,11 @@ var noteRepo = (function($) {
     function saveEditedNote(note) {
         var notes = publicGetAll();
         if (null != notes) {
-            for (var index in notes) {
-                if (notes[index].uniqueID === note.uniqueID) {
+            notes.forEach(function(locNote, index) {
+                if (locNote.uniqueID === note.uniqueID) {
                     notes[index] = note;
-                    break;
                 }
-            }
+            });
         }
         dataStorage.saveNoteList(notes);
     }

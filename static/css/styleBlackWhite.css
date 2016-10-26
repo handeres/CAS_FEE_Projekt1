@@ -14,8 +14,3 @@ header, main {
 table {
 	width: 100%;
 }
-
-.table-row.header {
-	background-color: #FFEEDB;
-	font-weight: bold;
-}

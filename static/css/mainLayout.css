@@ -3,15 +3,22 @@ html {
 	font-family: "Open Sans", sans-serif;
 }
 
+p, label{
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 header {
 	display: flex;
-	lex-flow: row;
-	margin: 50px 50px 0px 50px;
+	flex-flow: row;
+	margin: 50px 50px 0 50px;
 }
 
 main {
-	margin: 0px 50px 0px 50px;
+	margin: 0 50px 0 50px;
 }
+
 
 #pageWrapper {
 	min-width: 610px;
@@ -20,7 +27,7 @@ main {
 footer {
 	padding: 10px;
 	text-align: center;
-	margin: 0px 50px 0px 50px;
+	margin: 0 50px 0 50px;
 	height: 50px;
 }
 
@@ -28,13 +35,13 @@ footer {
 	display: inline;
 }
 
+
 .styleSelect {
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
 	width: 50%;
-	/*flex: 0 1 auto;*/
 }
 
 .newNote  {
@@ -42,7 +49,6 @@ footer {
 	justify-content: flex-start;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
-	flex: 0 1 auto;
 }
 
 .filterOptionen {
@@ -60,46 +66,40 @@ footer {
 }
 
 .showFinished {
-	/*display: flex;*/
 	justify-content: flex-end;
 	align-items: center;
 	margin: 10px 10px 10px 10px;
 	width: 20%;
-	padding: 0px 0px 0px 0px;
+	padding: 0;
 	flex: 0 1 auto;
 }
 
-/* Button Styles */
-.btn {
+button {
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #1570cd;
+	text-shadow:0 1px 0 #1570cd;
 	margin: 10px 10px 10px 10px;
-	/*flex: 0 1 auto;*/
-}
-
-.btn:active {
-	position:relative;
-	top:1px;
 }
 
 table {
 	width: 100%;
 }
 
-.table-row {
+.noteEntry {
     display: flex;
-   /* flex-direction: row;*/
     flex-wrap: wrap;
     width: 100%;
-/*justify-content: flex-start;*/
     align-content: flex-start;
-    flex: 0 1 auto;
+	padding-top: 5px;
+}
+
+.noteEntry.header {
+	font-weight: bold;
+	padding-top: 8px;
+	padding-bottom: 8px;
 }
 
 .text {
-  /*  flex: 0 1 auto;*/
-    white-space: nowrap;
     text-overflow: ellipsis;
     width: 25%;
     align-self: auto;
@@ -112,7 +112,6 @@ table {
 }
 
 .description {
-   /* flex: 0 1 auto;*/
     width: 500px;
 	min-width: 400px;
     height: 60px;
@@ -121,24 +120,14 @@ table {
 .title {
     flex: flex-start;
     width: 50%;
-    padding: 0px;
-    margin: 0px 0px 10px 0px;
+    padding: 0;
+    margin: 0 0 10px 0;
 }
 
 .importance {
 	flex: flex-end;
-	padding: 0px;
-	margin: 0px 0px 10px 0px;
+	padding: 0;
+	margin: 0 0 10px 0;
 }
 
-.table-row {
-	/*flex: 0 1 auto;*/
-	padding-top: 5px;
-}
 
-.table-row.header {
-	/*flex: 0 1 auto;*/
-	font-weight: bold;
-	padding-top: 8px;
-	padding-bottom: 8px;
-}

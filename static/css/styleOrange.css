@@ -11,8 +11,8 @@ main {
 	background: #f3f3f3;
 }
 
-.btn {
-	box-shadow:inset 0px 1px 0px 0px #97c4fe;
+button {
+	box-shadow:inset 0 1px 0 0 #97c4fe;
 	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
 	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
 	background-color:#3d94f6;
@@ -21,16 +21,21 @@ main {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	font-family:Arial;
+	/*font-family:Arial;*/
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;
 	text-decoration:none;
-	text-shadow:0px 1px 0px #1570cd;
+	text-shadow:0 1px 0 #1570cd;
+}
+
+button:hover {
+	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
+	background-color:#1e62d0;
 }
 
 .btn_inactive {
-    box-shadow:inset 0px 1px 0px 0px #97c4fe;
+    box-shadow:inset 0 1px 0 0 #97c4fe;
 	background:-ms-linear-gradient(top, #3d94f6 5%, #1e62d0 100%);
 	background:linear-gradient(to bottom, #3d94f6 5%, #1e62d0 100%);
 	background-color:#3d94f6;
@@ -41,9 +46,8 @@ main {
 	color:#ffffff;
 }
 
-.btn:hover {
-	background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
-	background-color:#1e62d0;
+.btn_active{
+	background: red;
 }
 
 .btn_active:hover{ 
@@ -52,26 +56,17 @@ main {
 	background-color:#FF9999;
 }
 
-.btn_active{
-   background: red;
-}
-
 .btn_selected:hover {
     background:linear-gradient(to bottom, #1e62d0 5%, #3d94f6 100%);
 	background-color:#1e62d0;
 	background:red; 
 }
 
-.table-row {
-	border-bottom: 2px solid #e0e0e0;
-	border-collapse: collapse;
-}
-
 table {
 	width: 100%;
 }
 
-.table-row.header {
-	background-color: #FFEEDB;
-	font-weight: bold;
+.noteEntry {
+	border-bottom: 2px solid #e0e0e0;
+	border-collapse: collapse;
 }

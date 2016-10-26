@@ -8,23 +8,6 @@
 
 var utilities = (function($) {
 
-    function publicGetCurrentDate() {
-        var fullDate = new Date()
-        //Thu Otc 15 2014 17:25:38 GMT+1000 {}
-        //convert month to 2 digits
-        var twoDigitMonth = fullDate.getMonth();
-        if (twoDigitMonth < 10) {
-            twoDigitMonth = "0" + twoDigitMonth;
-        }
-        //convert day to 2 digits
-        var twoDigitDay = fullDate.getDate();
-        if (twoDigitDay < 10) {
-            twoDigitDay = "0" + twoDigitDay;
-        }
-        var currentDate = fullDate.getFullYear() + "-"  + twoDigitMonth + "-"  +  twoDigitDay;
-        return currentDate;
-    }
-
     /**
      * Sets the css style
      * @returns {void}
@@ -41,7 +24,6 @@ var utilities = (function($) {
     }
 
     return {
-        getCurrentDate: publicGetCurrentDate,
         setStyle: publicSetStyle
     }
 
@@ -82,4 +64,6 @@ $.extend({
             uniqid += charstoformid[Math.floor(Math.random() * charstoformid.length)];
         }
         return uniqid;
-    }});
+}});
+
+
