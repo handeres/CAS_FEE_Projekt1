@@ -1,0 +1,178 @@
+/**
+ * Created by Hannes on 10.10.2016.
+ */
+var noteRepo = (function($) {
+
+    "use strict"
+
+    var dataStorage = noteDataStorage.createDataStorage();
+
+    /**
+     * This function compares two nodes by the created date
+     * @param {note} note object
+     * @param {note} note object
+     */
+    function publicCompareNotesByCreatedDate(s1, s2) {
+        if (s1.createdDate > s2.createdDate) {
+            return -1;
+        }
+        else if (s1.createdDate < s2.createdDate) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * This function compares two nodes by the finished date
+     * @param {note} note object
+     * @param {note} note object
+     */
+    function publicCompareNotesByFinishUntil(s1, s2) {
+        if (s1.finishUntil > s2.finishUntil) {
+            return -1;
+        }
+        else if (s1.finishUntil < s2.finishUntil) {
+            return 1;
+        }
+        return 0;
+    }
+
+    /**
+     * This function compares two nodes by date the importance
+     * @param {note} note object
+     * @param {note} note object
+     */
+    function publicCompareNotesByImportance(s1, s2) {
+        if (s1.importance > s2.importance) {
+            return -1;
+        }
+        else if (s1.importance < s2.importance) {
+            return 1;
+        }
+        return 0;
+    }
+    /**
+     * Saves a new note to the note list
+     * @param {note []} Notes array
+     * @returns {note []} filtered array list
+     */
+    function publicReadNodeListFiltered(callback) {
+		publicGetAll(function (notes) {
+				if (null != notes) {
+				var filterdNoteList = $.grep(notes, function(note, i){
+					return (note.done === false);
+				});
+				callback(filterdNoteList);
+			}
+		});
+    }
+
+    /**
+     * Finds a note object by uniqueID as key
+     * @param {string} uniqueID of the note
+     * @returns {note}
+     */
+    function publicGetNoteByUniqueID(uniqueID, callback) {
+        /*var notes = publicGetAll();
+        if (null == notes) {
+            return null;
+        }
+        var result;
+        notes.forEach(function(locNote) {
+            if (locNote.uniqueID === uniqueID) {
+                result = locNote;
+            }
+        });*/
+		dataStorage.getNoteById(uniqueID, callback);
+    }
+	
+	/**
+     * This function updates a note member value 
+     * @param {string} uniqueID of the note
+	 * @param {string} Name of the member
+	 * @param {object} Value for the member
+     * @returns {void}
+     */
+	function publicUpdateNoteMember(uniqueID, member, value) {
+		var note = publicGetNoteByUniqueID(uniqueID, function (note) {
+			if (null != note) {
+				note[member] = value;
+				publicSaveNote(note);			
+			}
+		});
+	}
+    
+    /**
+     * Saves a  note to the note list
+     * @param {note} Note object to be saved
+     * @returns {void}
+     */
+    function publicSaveNote(note) {
+        /* Check if it is a new entry */
+        if (  (undefined === note.uniqueID)
+			|| ("" === note.uniqueID)) {
+            /* genarete a key if the entry is new created */
+            note.uniqueID    = $.getUniqueID(10);
+            note.createdDate = $.now();
+            createNote(note);
+        } else {
+            /* data was edited. Overwrite data in the list */
+            saveEditedNote(note);
+        }
+    }
+
+    /**
+     * Saves a new note to the note list
+     * @param {note} Note object to be saved
+     * @returns {void}
+     */
+    function createNote(note) {
+       /* var notes = publicGetAll();
+        if (null == notes) {
+            notes = [];
+        }
+        notes.push(note);
+        dataStorage.saveNoteList(notes);*/
+		dataStorage.saveNote(note);
+    }
+
+    /**
+     * Saves a edited note to the note list
+     * @param {note} Note object to be saved
+     * @returns {void}
+     */
+    function saveEditedNote(note) {
+       /* var notes = publicGetAll();
+        if (null != notes) {
+            notes.forEach(function(locNote, index) {
+                if (locNote.uniqueID === note.uniqueID) {
+                    notes[index] = note;
+                }
+            });
+        }
+        dataStorage.saveNoteList(notes);*/
+		dataStorage.updateNote(locNote.id, locNote);
+    }
+
+    /**
+     * Gets a note list with all notes
+     * @returns {note[]} Note array
+     */
+    function publicGetAll(callback) {
+       return dataStorage.readNoteList(callback);
+    }
+
+    return {
+        compareNotesByCreatedDate : publicCompareNotesByCreatedDate,
+        compareNotesByFinishUntil : publicCompareNotesByFinishUntil,
+        compareNotesByImportance: publicCompareNotesByImportance,
+        readNodeListFiltered : publicReadNodeListFiltered,
+        saveNote : publicSaveNote,
+        getNoteByUniqueID: publicGetNoteByUniqueID,
+        getAll : publicGetAll,
+		updateNoteMember: publicUpdateNoteMember
+    };
+
+})(jQuery);
+
+

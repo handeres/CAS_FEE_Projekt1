@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <meta name="description" content="Note Pro - CAS FEE Project 1">
+        <title>Note Pro- New Note</title>
+
+		<link rel="stylesheet" href="css/notesLayout.css">
+        <link class="style" rel="stylesheet" href="">
+    </head>
+    <body>
+    <div id="pageWrapper">
+        <header>
+            <h1>New Note</h1>
+        </header>
+        <main role="main">
+            <form>
+                <div class="noteInput">
+                    <label for="title">Title</label>
+                    <input name="title" id="title" type="text" pattern=".{1,}" required>
+                </div>
+                <div class="noteInput">
+                    <label for="description">Description</label>
+                    <textarea name="description" id="description" rows="10" pattern=".{1,}" required></textarea>
+                </div>
+                <div class="noteInput">
+                    <label for="importance">Importance</label>
+                    <input name="importance" id="importance" type="number" min="1" max="5" required>
+                </div>
+                <div class="noteInput">
+                    <label for="date">Finish until</label>
+                    <input name="date" id="date" type="date" required>
+                </div>
+                <div class="noteInput">
+                    <label for="done">Finished!</label>
+                    <input name="done" id="done" type="checkbox">
+                </div>
+                <button id="save" type="submit">Save</button>
+                <button id="cancel" type="reset">Cancel</button>
+
+                <input id="uniqueID" hidden>
+                <input id="finishedDate" hidden>
+                <input id="createdDate" hidden>
+            </form>
+        </main>
+		<footer role="contentinfo">Designed by: Hannes Anderes</footer>
+    </div>
+
+    <script src="js/libs/jquery-2.2.3.min.js"></script>
+    <script src="js/libs/moment.js"></script>
+	<script src="js/ajaxUtil.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/seetingsData.js"></script>
+    <script src="js/note.js"></script>
+    <script src="js/newEditNote.js"></script>
+    <script src="js/utilities.js"></script>
+    </body>
+</html>

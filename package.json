@@ -1,7 +1,7 @@
 {
   "name": "CAS_FEE_Projekt1",
   "version": "1.0.0",
-  "description": "Static webserver",
+  "description": "CAS FEE Projekt1",
   "main": "index.js",
   "repository": {
     "type": "git",
@@ -11,7 +11,8 @@
   "license": "MIT",
   "homepage": "https://github.com/handeres/CAS_FEE_Projekt1.git",
   "dependencies": {
-    "finalhandler": "^0.3.6",
-    "serve-static": "^1.9.2"
+    "body-parser": "^1.15.2",
+    "express": "^4.14.0",
+    "nedb": "^1.8.0"
   }
 }
