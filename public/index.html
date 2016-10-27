@@ -10,24 +10,25 @@
 
             <script id="note-template" type="text/x-handlebars-template">
            {{#each this}}
-           <div class="noteEntry" data-uniqueID="{{uniqueID}}">
+           <div class="noteEntry" data-uniqueID="{{_id}}">
                <div class="text">
-                   <input type="date" value="{{finishUntil}}" disabled> 
-                   <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
-                   <label class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</label>
-               </div>
-               <div>
-                   <div class="output">
-                      <p class="title">{{title}}</p>
-                      {{#for importance}}
-                      <img class="importance" src="img/lightning-icon.png">
-                      {{/for}}
-                   </div>
-                   <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>
-               </div>
-               <div class="text">
-                   <button class="editNote">Edit</button>
-               </div>
+                <input type="date" value="{{finishUntil}}" disabled>
+                <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
+                <label class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</label>
+                </div>
+                <div>
+                    <div class="output">
+                        <p class="title">{{title}}</p>
+                        {{#for importance}}
+                        <img class="importance" src="img/lightning-icon.png">
+                        {{/for}}
+                    </div>
+                    <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>
+                </div>
+                <div class="text">
+                    <button class="editNote">Edit</button>
+                    <button class="deleteNote">Delete</button>
+                </div>
            </div>
            {{/each}}		  
         </script>
@@ -71,9 +72,10 @@
 		<script src="js/libs/jquery-2.2.3.min.js"></script>
 		<script src="js/libs/handlebars.min.js"></script>
 		<script src="js/libs/moment.js"></script>
+        <script src="js/hbsHelpers.js"></script>
 		<script src="js/ajaxUtil.js"></script>
 		<script src="js/data.js"></script>
-		<script src="js/seetingsData.js"></script>
+		<script src="js/settingsData.js"></script>
 		<script src="js/note.js"></script>
 		<script src="js/main.js"></script>
 		<script src="js/utilities.js"></script>

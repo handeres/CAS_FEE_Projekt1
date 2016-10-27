@@ -8,29 +8,18 @@ var noteDataStorage = (function() {
     class DataStorage {
 
         constructor() {
-            this.storageKey  = "notes"
             this.settingsKey = "settings";
         }
 
-        /**
-         * Saves note list to the storage.
-         * @param {note[]} Note object arry
-         * @returns {void}
-         */
-        saveNoteList(notList) {
-            return localStorage.setItem(this.storageKey, JSON.stringify(notList));
-        };
-		
 		/**
          * Saves note to the storage.
          * @param {note} Note object to be stored
          * @returns {void}
          */
-        saveNote(note) {
-            /*return localStorage.setItem(this.storageKey, JSON.stringify(notList));*/
-			rest.ajax("POST", "/notes/create/", note, {}).done(function (msg) {
-				console.log(msg);
-			});
+        saveNote(note, callback) {
+			rest.ajax("POST", "/notes/create/", note, {}).done(function () {
+                callback();
+            });
         };
 		
 		/**
@@ -38,9 +27,10 @@ var noteDataStorage = (function() {
          * @param {note} Note object to be updated in the storage
          * @returns {void}
          */
-        updateNote(note) {
-            /*return localStorage.setItem(this.storageKey, JSON.stringify(notList));*/
-			rest.ajax("POST", "/notes/update/" + note.id, note, {});
+        updateNote(id, note, callback) {
+			rest.ajax("POST", "/notes/update/" + id, note, {}).done(function () {
+                callback();
+            });
         };
 		
 		/**
@@ -49,11 +39,20 @@ var noteDataStorage = (function() {
          * @returns {note}
          */
         getNoteById(id, callback) {
-            /*return localStorage.setItem(this.storageKey, JSON.stringify(notList));*/
-			return rest.ajax("GET", "/" + id, "" , {}).done(function (msg) {
-				console.log(msg);
+			return rest.ajax("GET", "/notes/" + id, "" , {}).done(function (msg) {
 				callback(msg);
 			});
+        };
+
+        /**
+         * Delete the note
+         * @param {note} Note object to be deleted
+         * @returns {void}
+         */
+        deleteNote(id, callback) {
+            rest.ajax("POST", "/notes/delete/" + id, "", {}).done(function () {
+                callback();
+            });
         };
 		
         /**
@@ -61,11 +60,9 @@ var noteDataStorage = (function() {
          * @returns {note[]}
          */
         readNoteList(callback) {
-            /*return JSON.parse(localStorage.getItem(this.storageKey));*/
 			rest.ajax("GET", "/notes/all/", "", {}).done(function (msg) {
-				console.log(msg);
-				callback(msg);
-			});
+                callback(msg);
+            });
         };
 
         /**

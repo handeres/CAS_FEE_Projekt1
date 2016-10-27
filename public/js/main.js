@@ -7,17 +7,6 @@
 
     $(function() {
 
-        /**
-         *  Register Handlebar Helperfunction to build a for loop
-         */
-        Handlebars.registerHelper('for', function(count, options) {
-            var ret = "";
-            for(var i=0; i < count; i++) {
-                ret = ret + options.fn(count);
-            }
-            return ret;
-        });
-
         /** 
          *  Read notes from persistance and create html view
          */
@@ -40,8 +29,9 @@
 				var createNodeList = Handlebars.compile($("#note-template").html());			
 				$(".noteList").empty();
 				$(".noteList").append(createNodeList(notesList));
-				$(".editNote").on('click', editNoteClickEventHandler);                      
-				$(".finishedNote").on('change', finishedNoteClickEventHandler);	
+				$(".editNote").on('click', editNoteClickEventHandler);
+                $(".deleteNote").on('click', deleteNoteClickEventHandler);
+                $(".finishedNote").on('change', finishedNoteClickEventHandler);
 			} else {
 				showAsEmpty();
 			}
@@ -108,8 +98,8 @@
 				}
 				notes.forEach(function(note) {
 					if (true === note.done) {
-						note.relativeTimeDone = moment(note.finishedDate).fromNow();
-					}
+                        note.relativeTimeDone = moment(note.finishedDate).fromNow();
+                    }
 				});
 				createNoteList(notes);		
 			} else {
@@ -147,11 +137,19 @@
         }
 
         /**
+         *  This function is an button event handler to change the page to the edit note site
+         */
+        function deleteNoteClickEventHandler() {
+            var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
+            noteRepo.deleteNote(uniqueId, function() {
+                renderNoteList();
+            });
+        }
+
+        /**
          *  This function is an button event handler for the finished filter
          */
         function finishedClickEventHandler() {
-            /* Change backround color */
-            /*setFinishedButton();*/
             /* Save the settings */
             settingsData.setShowOnlyFinished(!settingsData.getShowOnlyFinished());
             renderNoteList();
@@ -185,9 +183,11 @@
 		function finishedNoteClickEventHandler() {
 			var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
 			var done =	$(this).is(":checked");	
-			noteRepo.updateNoteMember(uniqueId, 'done', done);
-			noteRepo.updateNoteMember(uniqueId, 'finishedDate', new Date()); 
-			renderNoteList();
+			if (true === done) {
+                noteRepo.finishNote(uniqueId, renderNoteList);
+            }else {
+                noteRepo.reworkNote(uniqueId, renderNoteList);
+            }
 		}
 
         /**

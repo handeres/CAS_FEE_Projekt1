@@ -4,7 +4,8 @@ var notes = require('../controller/notesController.js');
 
 router.post("/create/", notes.createNote);
 router.post("/update/:id/", notes.updateNote);
-router.get("/:id/", notes.getNote);
+router.post("/delete/:id/", notes.delete);
 router.get("/all/", notes.getAll);
+router.get("/:id/", notes.getNote);
 
 module.exports = router;

@@ -1,4 +1,24 @@
-{"title":"Erster Eintrag","description":"Dies ist eine Beschreibung","importance":"3","createdDate":1477491604337,"finishedDate":"","done":false,"_id":"21b2eXa40XZvRrO4"}
-{"title":"Test 1","description":"sdf","importance":"3","createdDate":1477493528429,"finishedDate":"","done":false,"_id":"DWm3RpNkuxcZXoeU"}
-{"title":"dsfg","description":"dfsg","importance":"4","createdDate":1477493806822,"finishedDate":"","done":false,"_id":"kyia3Fz9D1oQnj7g"}
-{"title":"dsfg","description":"fg","importance":"4","createdDate":1477494284794,"finishedDate":"","done":false,"_id":"LGduJgFKfC6OjQhd"}
+{"uniqueId":"GR7YoOPN4mZFFM8H","title":"BEsdf","description":"sdf","importance":"4","createdDate":"1477566561499","finishUntil":"2016-10-29","finishedDate":"Thu Oct 27 2016 13:12:06 GMT+0200 (Mitteleuropäische Sommerzeit)","done":true,"_id":"GR7YoOPN4mZFFM8H"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"2016-10-27T11:48:56.906Z","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"2016-10-27T11:49:25.303Z","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":1477568621518,"finishUntil":"2016-10-29","finishedDate":"2016-10-27T11:49:32.100Z","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"2016-10-27T12:00:08.273Z","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"GR7YoOPN4mZFFM8H","title":"BEsdf","description":"sdf","importance":"4","createdDate":"1477566561499","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"GR7YoOPN4mZFFM8H"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung 2","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"Thu Oct 27 2016 14:00:14 GMT+0200 (Mitteleuropäische Sommerzeit)","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"title":"Test df","description":"sdf","importance":"4","createdDate":1477569641097,"finishUntil":"2016-10-30","finishedDate":"","done":false,"_id":"Gb43ZpUTjRYJjd36"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung 2","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"uniqueId":"Gb43ZpUTjRYJjd36","title":"Test df","description":"sdf","importance":"4","createdDate":1477569641097,"finishUntil":"2016-10-30","finishedDate":"2016-10-27T12:00:57.174Z","done":true,"_id":"Gb43ZpUTjRYJjd36"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung 2","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"HXgbPgZoa2hCeOaT"}
+{"title":"Noch ein neuer Eintrag","description":"Beschereoinsdnfk smf","importance":"4","createdDate":1477570193169,"finishUntil":"2016-10-30","finishedDate":"Thu Oct 27 2016 14:09:52 GMT+0200 (Mitteleuropäische Sommerzeit)","done":true,"_id":"Cj4E0oYMaJciJG8K"}
+{"$$deleted":true,"_id":"Cj4E0oYMaJciJG8K"}
+{"uniqueId":"GR7YoOPN4mZFFM8H","title":"BEsdf","description":"sdf","importance":"4","createdDate":"1477566561499","finishUntil":"2016-10-29","finishedDate":"2016-10-27T12:10:03.264Z","done":true,"_id":"GR7YoOPN4mZFFM8H"}
+{"$$deleted":true,"_id":"GR7YoOPN4mZFFM8H"}
+{"uniqueId":"Gb43ZpUTjRYJjd36","title":"Test df","description":"sdf","importance":"4","createdDate":"1477569641097","finishUntil":"2016-10-30","finishedDate":"2016-10-27T12:00:57.174Z","done":true,"_id":"Gb43ZpUTjRYJjd36"}
+{"uniqueId":"HXgbPgZoa2hCeOaT","title":"Test1","description":"Dies ist eine Beschreibung 2","importance":"5","createdDate":"1477568621518","finishUntil":"2016-10-29","finishedDate":"2016-10-27T12:10:12.915Z","done":true,"_id":"HXgbPgZoa2hCeOaT"}
+{"$$deleted":true,"_id":"Gb43ZpUTjRYJjd36"}

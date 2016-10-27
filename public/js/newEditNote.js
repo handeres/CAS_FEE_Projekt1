@@ -52,13 +52,11 @@
             newNote.importance   = $("#importance").val();
             newNote.finishUntil  = $("#date").val();
             newNote.done         = $("#done").is(":checked");
-            newNote.uniqueID     = $("#uniqueID").val();
+            newNote._id          = $("#uniqueID").val();
             newNote.finishedDate = $("#finishedDate").val();
             newNote.createdDate  = $("#createdDate").val();
 
-            noteRepo.saveNote(newNote);
-            /* go back to main page */
-            goBackEventHandler();
+            noteRepo.saveNote(newNote, goBackEventHandler);
         }
 
         /**
@@ -66,19 +64,20 @@
          * @returns {void}
          */
         function loadNote(uniqueID) {
-            var note = noteRepo.getNoteByUniqueID(uniqueID);
-            if (null != note) {
-                $("#title").val(note.title)
-                $("#description").val(note.description);
-                $("#importance").val(note.importance);
-                $("#date").val(note.finishUntil);
-                if (true == note.done) {
-                    $("#done").attr("checked", "true");
+            noteRepo.getNoteByUniqueID(uniqueID, function(note) {
+                if (null != note) {
+                    $("#title").val(note.title);
+                    $("#description").val(note.description);
+                    $("#importance").val(note.importance);
+                    $("#date").val(note.finishUntil);
+                    if (true == note.done) {
+                        $("#done").attr("checked", "true");
+                    }
+                    $("#uniqueID").val(note._id);
+                    $("#createdDate").val(note.createdDate);
+                    $("#finishedDate").val(note.finishedDate);
                 }
-                $("#uniqueID").val(note.uniqueID);
-                $("#createdDate").val(note.createdDate);
-                $("#finishedDate").val(note.finishedDate);
-            }
+            });
         }
 
         /**
@@ -100,7 +99,6 @@
          */
         function goBackEventHandler() {
             window.history.back();
-			//windows.location = "index.html";
         }
 
         init();

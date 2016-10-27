@@ -59,10 +59,10 @@ var noteRepo = (function($) {
     function publicReadNodeListFiltered(callback) {
 		publicGetAll(function (notes) {
 				if (null != notes) {
-				var filterdNoteList = $.grep(notes, function(note, i){
+				var filteredNoteList = $.grep(notes, function(note, i){
 					return (note.done === false);
 				});
-				callback(filterdNoteList);
+				callback(filteredNoteList);
 			}
 		});
     }
@@ -73,16 +73,6 @@ var noteRepo = (function($) {
      * @returns {note}
      */
     function publicGetNoteByUniqueID(uniqueID, callback) {
-        /*var notes = publicGetAll();
-        if (null == notes) {
-            return null;
-        }
-        var result;
-        notes.forEach(function(locNote) {
-            if (locNote.uniqueID === uniqueID) {
-                result = locNote;
-            }
-        });*/
 		dataStorage.getNoteById(uniqueID, callback);
     }
 	
@@ -93,65 +83,70 @@ var noteRepo = (function($) {
 	 * @param {object} Value for the member
      * @returns {void}
      */
-	function publicUpdateNoteMember(uniqueID, member, value) {
-		var note = publicGetNoteByUniqueID(uniqueID, function (note) {
+	function publicUpdateNoteMember(uniqueID, member, value, callback) {
+        publicGetNoteByUniqueID(uniqueID, function (note) {
 			if (null != note) {
 				note[member] = value;
-				publicSaveNote(note);			
+				publicSaveNote(note, callback);
 			}
 		});
 	}
+
+    /**
+     * Set note as finished
+     * @param {string} Id of the note
+     * @returns {void}
+     */
+    function publicFinishNote(id, callback) {
+        publicGetNoteByUniqueID(id, function (note) {
+            if (null != note) {
+                note.done = true;
+                var newDate = new Date();
+                note.finishedDate = newDate;
+                publicSaveNote(note, callback);
+            }
+        });
+    }
+
+    /**
+     * Set note to rework
+     * @param {string} Id of the note
+     * @returns {void}
+     */
+    function publicReworkNote(id, callback) {
+        publicGetNoteByUniqueID(id, function (note) {
+            if (null != note) {
+                note.done = false;
+                note.finishedDate = "";
+                publicSaveNote(note, callback);
+            }
+        });
+    }
     
     /**
      * Saves a  note to the note list
      * @param {note} Note object to be saved
      * @returns {void}
      */
-    function publicSaveNote(note) {
+    function publicSaveNote(note, callback) {
         /* Check if it is a new entry */
-        if (  (undefined === note.uniqueID)
-			|| ("" === note.uniqueID)) {
-            /* genarete a key if the entry is new created */
-            note.uniqueID    = $.getUniqueID(10);
+        if (  (undefined === note._id)
+			|| ("" === note._id)) {
             note.createdDate = $.now();
-            createNote(note);
+            createNote(note, callback);
         } else {
             /* data was edited. Overwrite data in the list */
-            saveEditedNote(note);
+            saveEditedNote(note, callback);
         }
     }
 
     /**
-     * Saves a new note to the note list
-     * @param {note} Note object to be saved
+     * delete note
+     * @param {string} Id of the note
      * @returns {void}
      */
-    function createNote(note) {
-       /* var notes = publicGetAll();
-        if (null == notes) {
-            notes = [];
-        }
-        notes.push(note);
-        dataStorage.saveNoteList(notes);*/
-		dataStorage.saveNote(note);
-    }
-
-    /**
-     * Saves a edited note to the note list
-     * @param {note} Note object to be saved
-     * @returns {void}
-     */
-    function saveEditedNote(note) {
-       /* var notes = publicGetAll();
-        if (null != notes) {
-            notes.forEach(function(locNote, index) {
-                if (locNote.uniqueID === note.uniqueID) {
-                    notes[index] = note;
-                }
-            });
-        }
-        dataStorage.saveNoteList(notes);*/
-		dataStorage.updateNote(locNote.id, locNote);
+    function publicDeleteNote(id, callback) {
+        dataStorage.deleteNote(id, callback)
     }
 
     /**
@@ -159,7 +154,25 @@ var noteRepo = (function($) {
      * @returns {note[]} Note array
      */
     function publicGetAll(callback) {
-       return dataStorage.readNoteList(callback);
+        return dataStorage.readNoteList(callback);
+    }
+
+    /**
+     * Saves a new note to the note list
+     * @param {note} Note object to be saved
+     * @returns {void}
+     */
+    function createNote(note, callback) {
+		dataStorage.saveNote(note, callback);
+    }
+
+    /**
+     * Saves a edited note to the note list
+     * @param {note} Note object to be saved
+     * @returns {void}
+     */
+    function saveEditedNote(note, callback) {
+		dataStorage.updateNote(note._id, note, callback);
     }
 
     return {
@@ -168,6 +181,9 @@ var noteRepo = (function($) {
         compareNotesByImportance: publicCompareNotesByImportance,
         readNodeListFiltered : publicReadNodeListFiltered,
         saveNote : publicSaveNote,
+        deleteNote: publicDeleteNote,
+        finishNote: publicFinishNote,
+        reworkNote: publicReworkNote,
         getNoteByUniqueID: publicGetNoteByUniqueID,
         getAll : publicGetAll,
 		updateNoteMember: publicUpdateNoteMember
