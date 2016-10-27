@@ -8,14 +8,14 @@ var settingsData = (function($) {
     "use strict"
 
     var settingType = {currentFilter: null, showOnlyFinished: false, currentStyle: "StyleOrange"};
-    var dataStorage = noteDataStorage.createDataStorage();
+
 
     function publicLoad() {
-        var locSettings = dataStorage.loadSettings();
+        var locSettings = loadSettings();
         if (null === locSettings) {
             /* First time settings are read. Save it first */
-            dataStorage.saveSettings(settingType);
-            settingType = dataStorage.loadSettings();
+            saveSettings(settingType);
+            settingType = loadSettings();
         }
         else {
             settingType = locSettings;
@@ -24,17 +24,17 @@ var settingsData = (function($) {
 
     function publicSetCurrentFilter(currentFilter) {
         settingType.currentFilter = currentFilter;
-        dataStorage.saveSettings(settingType);
+        saveSettings(settingType);
     }
 
     function publicSetShowOnlyFinished(showOnlyFinished) {
         settingType.showOnlyFinished = showOnlyFinished;
-        dataStorage.saveSettings(settingType);
+        saveSettings(settingType);
     }
 
     function publicSetCurrentStyle(currentStyle) {
         settingType.currentStyle = currentStyle;
-        dataStorage.saveSettings(settingType);
+        saveSettings(settingType);
     }
 
     function publicGetCurrentFilter() {
@@ -47,6 +47,22 @@ var settingsData = (function($) {
 
     function publicGetCurrentStyle() {
         return settingType.currentStyle;
+    }
+
+    /**
+     * Save the settings
+     * @param {settings} settings object
+     * @returns {void}
+     */
+    function saveSettings(settings) {
+        return localStorage.setItem("settings", JSON.stringify(settings));
+    }
+    /**
+     * Reads the settings
+     * @returns {settings}
+     */
+    function loadSettings() {
+        return JSON.parse(localStorage.getItem("settings"));
     }
 
     return {

@@ -1,8 +1,7 @@
 var Datastore = require('nedb');
 var db = new Datastore({ filename: './data/order.db', autoload: true });
 
-function Note(id, title, description, importance, createdDate, finishUntil, finishedDate, done) {
-    this.uniqueId = id;
+function Note(title, description, importance, createdDate, finishUntil, finishedDate, done) {
     this.title = title;
     this.description = description;
 	this.importance = importance;
@@ -12,8 +11,8 @@ function Note(id, title, description, importance, createdDate, finishUntil, fini
 	this.done = done;	
 }
 
-function publicAdd(id, title, description, importance, createdDate, finishUntilDate, finishedDate, done, callback) {
-    var note = new Note(id, title, description, importance, createdDate, finishUntilDate, finishedDate, done);
+function publicAdd(title, description, importance, createdDate, finishUntilDate, finishedDate, done, callback) {
+    var note = new Note(title, description, importance, createdDate, finishUntilDate, finishedDate, done);
     db.insert(note, function(err, note){
         if(callback){
             callback(err, note);
@@ -22,7 +21,7 @@ function publicAdd(id, title, description, importance, createdDate, finishUntilD
 }
 
 function publicUpdate(id, title, description, importance, createdDate, finishUntilDate, finishedDate, done, callback) {
-    var note = new Note(id, title, description, importance, createdDate, finishUntilDate, finishedDate, done);
+    var note = new Note(title, description, importance, createdDate, finishUntilDate, finishedDate, done);
     db.update({_id: id}, {$set: note}, {}, function (err, note) {
         callback(err, note);
     });

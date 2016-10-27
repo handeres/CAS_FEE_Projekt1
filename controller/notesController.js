@@ -4,8 +4,7 @@ var noteStore = require("../services/noteStore.js");
 
 module.exports.createNote = function(req, res) {
       
-    noteStore.add(req.body.uniqueId, 
-				  req.body.title,
+    noteStore.add(req.body.title,
 				  req.body.description,
 				  req.body.importance,
 				  req.body.createdDate,

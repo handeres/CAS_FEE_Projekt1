@@ -8,7 +8,7 @@ var noteDataStorage = (function() {
     class DataStorage {
 
         constructor() {
-            this.settingsKey = "settings";
+
         }
 
 		/**
@@ -65,22 +65,6 @@ var noteDataStorage = (function() {
             });
         };
 
-        /**
-         * Save the settings
-         * @param {settings} Settings object
-         * @returns {void}
-         */
-        saveSettings(settings) {
-            return localStorage.setItem(this.settingsKey, JSON.stringify(settings));
-        }
-
-        /**
-         * Reads the settings
-         * @returns {settings}
-         */
-        loadSettings() {
-            return JSON.parse(localStorage.getItem(this.settingsKey));
-        }
     };
 
 	/**
