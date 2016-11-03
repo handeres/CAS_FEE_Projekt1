@@ -1,18 +1,8 @@
-{"title":"dsf","description":"dsf","importance":"4","createdDate":1477577866728,"finishUntil":"2016-10-28","finishedDate":"","done":false,"_id":"62fxn8bx9FfnLVBb"}
-{"title":"ret","description":"fdg","importance":"5","createdDate":1477577815008,"finishUntil":"2016-10-22","finishedDate":"","done":false,"_id":"OuqhP4bglROjmwvI"}
-{"title":"sdffdg","description":"dfgfdg","importance":"5","createdDate":1477578160489,"finishUntil":"2016-10-30","finishedDate":"","done":false,"_id":"cwxRL20A5Q8a9hvC"}
-{"title":"dsf","description":"dsf","importance":"4","createdDate":1477577866728,"finishUntil":"2016-10-28","finishedDate":"","done":false,"_id":"dmZcoT4kKGpZPzV9"}
-{"title":"Dies irtndsnkf","description":"Df","importance":"5","createdDate":1477577771766,"finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"qm3dhTbrIpQIK6io"}
-{"title":"gfdfg","description":"dfg","importance":"3","createdDate":1477578349722,"finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"GyisTYPJ6FsPeiaV"}
-{"title":"Neuer Edit","description":"dfg","importance":"3","createdDate":"1477578349722","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"GyisTYPJ6FsPeiaV"}
-{"title":"Neuer Edit 2","description":"dfg","importance":"3","createdDate":"1477578349722","finishUntil":"2016-10-29","finishedDate":"","done":false,"_id":"GyisTYPJ6FsPeiaV"}
-{"$$deleted":true,"_id":"dmZcoT4kKGpZPzV9"}
-{"title":"Neuer Edit 2","description":"dfg","importance":"3","createdDate":"1477578349722","finishUntil":"2016-10-29","finishedDate":"2016-10-27T14:28:07.435Z","done":true,"_id":"GyisTYPJ6FsPeiaV"}
-{"title":"Neuer Edit 2","description":"dfg","importance":"3","createdDate":"1477578349722","finishUntil":"2016-10-29","finishedDate":"2016-10-27T14:28:07.435Z","done":true,"_id":"GyisTYPJ6FsPeiaV"}
-{"title":"ret","description":"fdg","importance":"5","createdDate":"1477577815008","finishUntil":"2016-10-22","finishedDate":"","done":false,"_id":"OuqhP4bglROjmwvI"}
-{"title":"sdffdg","description":"dfgfdg","importance":"5","createdDate":"1477578160489","finishUntil":"2016-10-30","finishedDate":"","done":false,"_id":"cwxRL20A5Q8a9hvC"}
-{"title":"ret","description":"fdg","importance":"5","createdDate":"1477577815008","finishUntil":"2016-10-22","finishedDate":"","done":false,"_id":"OuqhP4bglROjmwvI"}
-{"title":"ret","description":"fdg","importance":"5","createdDate":"1477577815008","finishUntil":"2016-10-22","finishedDate":"","done":false,"_id":"OuqhP4bglROjmwvI"}
-{"title":"ret","description":"fdg","importance":"5","createdDate":"1477577815008","finishUntil":"2016-10-22","finishedDate":"","done":false,"_id":"OuqhP4bglROjmwvI"}
-{"$$deleted":true,"_id":"OuqhP4bglROjmwvI"}
-{"title":"dsf","description":"dsf","importance":"4","createdDate":"1477577866728","finishUntil":"2016-10-28","finishedDate":"Thu Oct 27 2016 16:35:23 GMT+0200 (Mitteleuropäische Sommerzeit)","done":true,"_id":"62fxn8bx9FfnLVBb"}
+{"title":"Dies ist eine Editierung","description":"Besjndfksdjf","importance":"1","createdDate":"1477901709383","finishUntil":"2016-11-23","finishedDate":"","done":false,"_id":"ao9Q73D19SV7s1qb"}
+{"title":"Dies ist ein weiterer Test","description":"sdfsdfdf","importance":"4","createdDate":"1477914995691","finishUntil":"2016-10-19","finishedDate":"2016-10-31T14:05:31.954Z","done":true,"_id":"gyRmeCTPnWadg9jF"}
+{"title":"Dies ist eine Editierung","description":"Besjndfksdjf","importance":"1","createdDate":"1477901709383","finishUntil":"2016-11-23","finishedDate":"2016-10-31T14:13:55.462Z","done":true,"_id":"ao9Q73D19SV7s1qb"}
+{"title":"Dies ist eine Editierung","description":"Besjndfksdjf","importance":"1","createdDate":"1477901709383","finishUntil":"2016-11-23","finishedDate":"","done":false,"_id":"ao9Q73D19SV7s1qb"}
+{"title":"Dies ist ein weiterer Test","description":"sdfsdfdf","importance":"4","createdDate":"1477914995691","finishUntil":"2016-10-19","finishedDate":"","done":false,"_id":"gyRmeCTPnWadg9jF"}
+{"title":"Dies ist ein weiterer Test","description":"sdfsdfdf","importance":"4","createdDate":"1477914995691","finishUntil":"2016-10-19","finishedDate":"2016-10-31T15:21:21.063Z","done":true,"_id":"gyRmeCTPnWadg9jF"}
+{"title":"Dies ist eine Editierung","description":"Besjndfksdjf","importance":"2","createdDate":"1477901709383","finishUntil":"2016-11-23","finishedDate":"","done":false,"_id":"ao9Q73D19SV7s1qb"}
+{"title":"Dies ist eine Editierung","description":"Besjndfksdjf","importance":"2","createdDate":"1477901709383","finishUntil":"2016-11-23","finishedDate":"2016-10-31T15:42:50.041Z","done":true,"_id":"ao9Q73D19SV7s1qb"}

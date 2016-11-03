@@ -1,10 +1,6 @@
 /**
  * Created by Hannes Anderes on 10.10.2016.
  */
-/**
- * Gets the current date of today. Format: YYYY-MM-DD
- * @returns {string}
- */
 
 var utilities = (function($) {
 

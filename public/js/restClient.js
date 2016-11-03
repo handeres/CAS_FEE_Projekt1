@@ -5,7 +5,7 @@ var noteDataStorage = (function() {
 
     "use strict"
 
-    class DataStorage {
+    class RestClient {
 
         constructor() {
 
@@ -40,8 +40,8 @@ var noteDataStorage = (function() {
          */
         getNoteById(id, callback) {
 			return rest.ajax("GET", "/notes/" + id, "" , {}).done(function (msg) {
-				callback(msg);
-			});
+                callback(msg);
+            });
         };
 
         /**
@@ -50,7 +50,7 @@ var noteDataStorage = (function() {
          * @returns {void}
          */
         deleteNote(id, callback) {
-            rest.ajax("POST", "/notes/delete/" + id, "", {}).done(function () {
+            rest.ajax("POST", "/notes/remove/" + id + "/", "", {}).done(function () {
                 callback();
             });
         };
@@ -64,18 +64,17 @@ var noteDataStorage = (function() {
                 callback(msg);
             });
         };
-
     };
 
 	/**
-	 * Creates a DataStorage object
-	 * @returns {DataStorage}
+	 * Creates a RestClient object
+	 * @returns {RestClient}
 	 */
-    function publicCreateDataStorage() {
-        return new DataStorage();
+    function publicCreateRestClient() {
+        return new RestClient();
     }
 
     return {
-        createDataStorage: publicCreateDataStorage
+        createRestClient: publicCreateRestClient
     }
 })();

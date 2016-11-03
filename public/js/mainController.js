@@ -7,56 +7,50 @@
 
     $(function() {
 
-        /** 
-         *  Read notes from persistance and create html view
-         */
-        function init() {
-            /* Read the UI Settings */
-            loadUISettingsFromStorage();
-            renderNoteList();
-
-            $(".filters").on('click', 'button', filterClickEventHandler);
-            $(".showFinished button").on('click', finishedClickEventHandler);
-            $(".newNote").on('click', newNoteClickEventHandler);
-			$(".styleSelect select").on('change', changeStyleEventHandler);
-        }
+        var view = mainView.createView();
 
         /**
-         *  This function creates table rows from the handlebar template 'node-template'
+         * This function initializes the main controller
          */
-        function createNoteList(notesList) {
-			if (notesList.length > 0) {
-				var createNodeList = Handlebars.compile($("#note-template").html());			
-				$(".noteList").empty();
-				$(".noteList").append(createNodeList(notesList));
-				$(".editNote").on('click', editNoteClickEventHandler);
-                $(".deleteNote").on('click', deleteNoteClickEventHandler);
-                $(".finishedNote").on('change', finishedNoteClickEventHandler);
-			} else {
-				showAsEmpty();
-			}
+        function init() {
+            settingsData.load();
+
+            presetViewValues();
+
+            view.bindGlobalEvents(filterClickEventHandler,
+                                  finishedClickEventHandler,
+                                  newNoteClickEventHandler,
+                                  changeStyleEventHandler);
+            renderNoteList();
         }
-		
-		/**
-		*	This function shows a no note information
-		*/
-		function showAsEmpty() {
-			var noNotes = Handlebars.compile($("#no-note-template").html());
-			$(".noteList").empty();
-			$(".noteList").append(noNotes);
-		}
 
         /**
          *  This function is an button event handler for the filter functionality
+         * @param {Event} Click event
+         * @returns {void}
          */
         function filterClickEventHandler(event) {
             var data = $(this).data();
-            /* Set all button backgrounds to default */
-            $(".filters button").removeClass('btn_active');
-            $(event.target).addClass('btn_active');
+            view.setActiveFilterBtnBackground(event.target);
             if (null != data) {
                 createFilteredList(data.filtertype);
             }
+        }
+
+        /**
+         *  This function is an button event handler for new note
+         * @returns {void}
+         */
+        function newNoteClickEventHandler() {
+            view.gotToEditNoteSite(this);
+        }
+
+        /**
+         *  This function is an button event handler to edit the note
+         * @returns {void}
+         */
+        function editClickEventHandler() {
+            view.gotToEditNoteSite(this);
         }
 
         /**
@@ -89,6 +83,8 @@
 		
 		/**
          *  This function creates the note list html depending on the current filters
+         *  @param {note[]} Array of notes
+         *  @returns {void}
          */
 		function createListCallback(notes) {		
 			if (null != notes) {		
@@ -100,15 +96,20 @@
 					if (true === note.done) {
                         note.relativeTimeDone = moment(note.finishedDate).fromNow();
                     }
+                    note.finishUntil = moment(note.finishUntil).format('ll');
 				});
-				createNoteList(notes);		
+                view.renderNoteList(notes,
+                    editClickEventHandler,
+                    deleteNoteClickEventHandler,
+                    finishedNoteClickEventHandler);
 			} else {
-				showAsEmpty();
+                view.renderAsEmpty();
 			}
 		}
 
         /**
          *  This function creates the note list html depending on the current filters
+         *  @returns {void}
          */
         function renderNoteList() {
 			setFinishedButton();
@@ -122,67 +123,53 @@
         }
 
         /**
-         *  This function is an button event handler to change the page to the new note site
-         */
-        function newNoteClickEventHandler() {
-            window.location.href='../notes.html';
-        }
-
-        /**
          *  This function is an button event handler to change the page to the edit note site
-         */
-        function editNoteClickEventHandler() {
-			var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
-            window.location.href='../notes.html?Page=edit&Key=' + uniqueId;
-        }
-
-        /**
-         *  This function is an button event handler to change the page to the edit note site
+         *  @returns {void}
          */
         function deleteNoteClickEventHandler() {
-            var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
-            noteRepo.deleteNote(uniqueId, function() {
-                renderNoteList();
-            });
+            var uniqueId = view.getNoteEntryUniqueID(this);
+            noteRepo.deleteNote(uniqueId, renderNoteList);
         }
 
         /**
          *  This function is an button event handler for the finished filter
+         *  @returns {void}
          */
         function finishedClickEventHandler() {
-            /* Save the settings */
             settingsData.setShowOnlyFinished(!settingsData.getShowOnlyFinished());
             renderNoteList();
         }
 
         /**
-         *  This function toggles the color of the button
+         *  This function toggles text of the finish button
+         *  @returns {void}
          */
         function setFinishedButton() {
-			if (true === settingsData.getShowOnlyFinished()) {            
-				$(".showFinished button").text("Hide Finished");
+			if (true === settingsData.getShowOnlyFinished()) {
+                view.setFinishFilterBtnText("Hide Finished");
             }
             else {
-				$(".showFinished button").text("Show All");
+                view.setFinishFilterBtnText("Show All");
             }
         }
 
         /**
          *  This function is an selection event handler to change the style
+         *  @returns {void}
          */
         function changeStyleEventHandler() {
-            var selectedStyle = $('.styleSelect option:selected').val();
-            utilities.setStyle(selectedStyle);
-            /* Save the settings */
-            settingsData.setCurrentStyle(selectedStyle);
+            view.setSelectedStyle(function (selectedStyle) {
+                settingsData.setCurrentStyle(selectedStyle);
+            });
         }
 		
-		 /**
-         *  This function is a checkbox eventhandler and sets a note to done or to rework
+        /**
+         *  This function is a checkbox event handler and sets a note to done or to rework
+         *  @returns {void}
          */
 		function finishedNoteClickEventHandler() {
-			var uniqueId = $(this).closest('.noteEntry').data('uniqueid');
-			var done =	$(this).is(":checked");	
+			var uniqueId = view.getNoteEntryUniqueID(this);
+			var done =	view.isNoteEntryFinished(this);
 			if (true === done) {
                 noteRepo.finishNote(uniqueId, renderNoteList);
             }else {
@@ -191,17 +178,14 @@
 		}
 
         /**
-         * Load current UI settings from storage
+         * Preset the view values
+         * @returns {void}
          */
-        function loadUISettingsFromStorage() {
-            settingsData.load();			
-            $(".styleSelect select").val(settingsData.getCurrentStyle());
+        function presetViewValues() {
+            view.setStyle(settingsData.getCurrentStyle());
+            view.setFilterAsActiveByName(settingsData.getCurrentFilter());
             changeStyleEventHandler();
             setFinishedButton();
-            var currentFilter = settingsData.getCurrentFilter()
-            if (undefined != currentFilter)  {
-                $("#" + currentFilter).addClass('btn_active');
-            }
         }
 
         init();

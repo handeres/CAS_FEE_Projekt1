@@ -1,6 +1,4 @@
 var noteStore = require("../services/noteStore.js");
-/*var util = require("../util/security");*/
-
 
 module.exports.createNote = function(req, res) {
       

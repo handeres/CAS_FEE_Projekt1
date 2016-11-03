@@ -14,7 +14,7 @@
             <h1>New Note</h1>
         </header>
         <main role="main">
-            <form>
+            <div class="noteData"> <!-- no form because ajax is used -->
                 <div class="noteInput">
                     <label for="title">Title</label>
                     <input name="title" id="title" type="text" pattern=".{1,}" required>
@@ -35,13 +35,13 @@
                     <label for="done">Finished!</label>
                     <input name="done" id="done" type="checkbox">
                 </div>
-                <button id="save" type="submit">Save</button>
+                <button id="save" type="save">Save</button>
                 <button id="cancel" type="reset">Cancel</button>
 
                 <input id="uniqueID" hidden>
                 <input id="finishedDate" hidden>
                 <input id="createdDate" hidden>
-            </form>
+            </div>
         </main>
 		<footer role="contentinfo">Designed by: Hannes Anderes</footer>
     </div>
@@ -49,10 +49,11 @@
     <script src="js/libs/jquery-2.2.3.min.js"></script>
     <script src="js/libs/moment.js"></script>
 	<script src="js/ajaxUtil.js"></script>
-    <script src="js/data.js"></script>
+    <script src="js/restClient.js"></script>
     <script src="js/settingsData.js"></script>
     <script src="js/note.js"></script>
-    <script src="js/newEditNote.js"></script>
+    <script src="js/newEditView.js"></script>
+    <script src="js/newEditController.js"></script>
     <script src="js/utilities.js"></script>
     </body>
 </html>

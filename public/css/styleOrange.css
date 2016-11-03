@@ -62,10 +62,6 @@ button:hover {
 	background:red; 
 }
 
-table {
-	width: 100%;
-}
-
 .noteEntry {
 	border-bottom: 2px solid #e0e0e0;
 	border-collapse: collapse;

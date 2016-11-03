@@ -1,44 +1,13 @@
 <!DOCTYPE html>
 <html>
  	<head>
-		    <meta charset="utf-8">
-            <meta name="description" content="Note Pro - CAS FEE Project 1">
-            <title>Note Pro</title>
+        <meta charset="utf-8">
+        <meta name="description" content="Note Pro - CAS FEE Project 1">
+        <title>Note Pro</title>
 
-            <link rel="stylesheet" href="css/mainLayout.css">
-            <link class="style" rel="stylesheet" href="">
+        <link rel="stylesheet" href="css/mainLayout.css">
+        <link class="style" rel="stylesheet" href="">
 
-            <script id="note-template" type="text/x-handlebars-template">
-           {{#each this}}
-           <div class="noteEntry" data-uniqueID="{{_id}}">
-               <div class="text">
-                <input type="date" value="{{finishUntil}}" disabled>
-                <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
-                <label class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</label>
-                </div>
-                <div>
-                    <div class="output">
-                        <p class="title">{{title}}</p>
-                        {{#for importance}}
-                        <img class="importance" src="img/lightning-icon.png">
-                        {{/for}}
-                    </div>
-                    <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>
-                </div>
-                <div class="text">
-                    <button class="editNote">Edit</button>
-                    <button class="deleteNote">Delete</button>
-                </div>
-           </div>
-           {{/each}}		  
-        </script>
-		<script id="no-note-template" type="text/x-handlebars-template">
-			 <div class="noteEntry">
-               <section class="text">
-				<p>No notes found!</p>
-			   </section>
-			 </div>
-		</script>
    </head>
    <body>
        <div id="pageWrapper">
@@ -56,15 +25,15 @@
            <main role="main">
                   <div class="filterOptionen ">
                        <div class="filters">
-                           <button data-filterType="finishedDate">By Finish Date</button>
-                           <button data-filterType="createdDate">By Created Date</button>
-                           <button data-filterType="importance">By Importance</button>
+                           <button id="finishedDate" data-filterType="finishedDate">By Finish Date</button>
+                           <button id="createdDate" data-filterType="createdDate">By Created Date</button>
+                           <button id="importance" data-filterType="importance">By Importance</button>
                        </div>
                        <div class="showFinished">
                            <button>Show finished</button>
                        </div>
                   </div>
-                  <table class="noteList"></table>
+                  <div class="noteList"></div>
              </main>
 			 <footer role="contentinfo">Designed by: Hannes Anderes</footer>
          </div>
@@ -73,12 +42,47 @@
 		<script src="js/libs/handlebars.min.js"></script>
 		<script src="js/libs/moment.js"></script>
         <script src="js/hbsHelpers.js"></script>
+        <script src="js/utilities.js"></script>
 		<script src="js/ajaxUtil.js"></script>
-		<script src="js/data.js"></script>
+		<script src="js/restClient.js"></script>
 		<script src="js/settingsData.js"></script>
 		<script src="js/note.js"></script>
-		<script src="js/main.js"></script>
-		<script src="js/utilities.js"></script>
+        <script src="js/mainView.js"></script>
+		<script src="js/mainController.js"></script>
+
+        <script id="note-template" type="text/x-handlebars-template">
+           {{#each this}}
+           <div class="noteEntry" data-uniqueID="{{_id}}">
+               <div class="text">
+                   <!--<input type="date" value="{{finishUntil}}" disabled>-->
+                   <label class="inline">{{finishUntil}}</label>
+                   <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
+                   <label class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</label>
+               </div>
+               <div>
+                   <div class="output">
+                       <p class="title">{{title}}</p>
+                       {{#for importance}}
+                       <img class="importance" src="img/lightning-icon.png" alt="lightning">
+                       {{/for}}
+                   </div>
+                   <textarea class="description" type="text" disabled="disabled">{{description}}</textarea>
+               </div>
+               <div class="text">
+                   <button class="editNote">Edit</button>
+                   <button class="deleteNote">Delete</button>
+               </div>
+           </div>
+           {{/each}}
+        </script>
+        <script id="no-note-template" type="text/x-handlebars-template">
+           <div class="noteEntry">
+               <section class="text">
+                   <p>No notes found!</p>
+               </section>
+           </div>
+        </script>
+
 	</body>
 </html>
 

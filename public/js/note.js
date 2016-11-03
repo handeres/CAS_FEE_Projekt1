@@ -5,7 +5,7 @@ var noteRepo = (function($) {
 
     "use strict"
 
-    var dataStorage = noteDataStorage.createDataStorage();
+    var restClient = noteDataStorage.createRestClient();
 
     /**
      * This function compares two nodes by the created date
@@ -73,7 +73,7 @@ var noteRepo = (function($) {
      * @returns {note}
      */
     function publicGetNoteByUniqueID(uniqueID, callback) {
-		dataStorage.getNoteById(uniqueID, callback);
+		restClient.getNoteById(uniqueID, callback);
     }
 	
 	/**
@@ -146,7 +146,7 @@ var noteRepo = (function($) {
      * @returns {void}
      */
     function publicDeleteNote(id, callback) {
-        dataStorage.deleteNote(id, callback)
+        restClient.deleteNote(id, callback)
     }
 
     /**
@@ -154,7 +154,7 @@ var noteRepo = (function($) {
      * @returns {note[]} Note array
      */
     function publicGetAll(callback) {
-        return dataStorage.readNoteList(callback);
+        return restClient.readNoteList(callback);
     }
 
     /**
@@ -163,7 +163,7 @@ var noteRepo = (function($) {
      * @returns {void}
      */
     function createNote(note, callback) {
-		dataStorage.saveNote(note, callback);
+		restClient.saveNote(note, callback);
     }
 
     /**
@@ -172,7 +172,7 @@ var noteRepo = (function($) {
      * @returns {void}
      */
     function saveEditedNote(note, callback) {
-		dataStorage.updateNote(note._id, note, callback);
+		restClient.updateNote(note._id, note, callback);
     }
 
     return {
