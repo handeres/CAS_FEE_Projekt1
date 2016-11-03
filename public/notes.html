@@ -14,14 +14,14 @@
             <h1>New Note</h1>
         </header>
         <main role="main">
-            <form id="myForm">
+            <form id="noteForm">
                 <div class="noteInput">
                     <label for="title">Title</label>
-                    <input name="title" id="title" type="text" pattern=".{1, 30}"   required>
+                    <input name="title" id="title" type="text" pattern=".{1,30}"   required>
                 </div>
                 <div class="noteInput">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" rows="10" pattern=".{1, 50}" required></textarea>
+                    <textarea name="description" id="description" rows="10" pattern=".{1,100}" required></textarea>
                 </div>
                 <div class="noteInput">
                     <label for="importance">Importance</label>

@@ -13,8 +13,8 @@ var noteView = (function($) {
 
         constructor() {
 
-            $("#cancel").on('click', this.goBackToMainPage);
-            $("#done").on('click', this.setFinishedDate);
+            $("#cancel").on('click', this.goBackToMainPage.bind(this));
+            $("#done").on('click', this.setFinishedDate.bind(this));
 
             /* Avoid past dates */
             var now = new Date(), minDate = now.toISOString().substring(0,10);
@@ -27,7 +27,7 @@ var noteView = (function($) {
          *  @returns {void}
          */
         registrySaveEvent(saveClickEventHandler) {
-            $("#myForm").on('submit', saveClickEventHandler);
+            $("#noteForm").on('submit', saveClickEventHandler);
         }
 
         /**
@@ -113,7 +113,6 @@ var noteView = (function($) {
          *  @returns {void}
          */
         goBackToMainPage() {
-           // window.history.back();
             window.location.href = '../';
         }
     }

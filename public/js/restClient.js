@@ -19,6 +19,9 @@ var noteDataStorage = (function() {
         saveNote(note, callback) {
 			rest.ajax("POST", "/notes/create/", note, {}).done(function () {
                 callback();
+            }) .fail(function() {
+                alert( "Couldn't not access to the server!" );
+                callback();
             });
         };
 		
@@ -29,6 +32,9 @@ var noteDataStorage = (function() {
          */
         updateNote(id, note, callback) {
 			rest.ajax("POST", "/notes/update/" + id, note, {}).done(function () {
+                callback();
+            }).fail(function() {
+                alert( "Couldn't not access to the server!");
                 callback();
             });
         };
@@ -41,6 +47,8 @@ var noteDataStorage = (function() {
         getNoteById(id, callback) {
 			return rest.ajax("GET", "/notes/" + id, "" , {}).done(function (msg) {
                 callback(msg);
+            }).fail(function() {
+                alert( "Couldn't not access to the server!");
             });
         };
 
@@ -52,6 +60,9 @@ var noteDataStorage = (function() {
         deleteNote(id, callback) {
             rest.ajax("POST", "/notes/remove/" + id + "/", "", {}).done(function () {
                 callback();
+            }).fail(function() {
+                alert( "Couldn't access to the server!");
+                callback();
             });
         };
 		
@@ -62,6 +73,8 @@ var noteDataStorage = (function() {
         readNoteList(callback) {
 			rest.ajax("GET", "/notes/all/", "", {}).done(function (msg) {
                 callback(msg);
+            }).fail(function() {
+                alert( "Couldn't not access to the server!");
             });
         };
     };

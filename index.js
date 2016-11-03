@@ -1,9 +1,21 @@
 var express = require('express');
 var bodyParser = require('body-parser');
+var hbs = require('express-hbs');
 var app = express();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 
+app.engine('hbs', hbs.express4());
+app.set('view engine', 'html');
+app.set('views', __dirname + '/views');
+
+app.use(require("method-override")(function(req, res){
+    if (req.body && typeof req.body === 'object' && '_method' in req.body) {
+        var method = req.body._method;
+        delete req.body._method;
+        return method;
+    }
+}));
 
 function errorHandler(err, req, res, next) {
     res.status(500).end(err.message);
@@ -16,14 +28,7 @@ app.use(errorHandler);
 app.get("/", function(req, res){
     res.sendFile("/index.html",  {root: __dirname + '/public/'});
 });
-app.use(function (err, req, res, next) {
-    if (err.name === 'UnauthorizedError') {
-        res.status(401).send('No token / Invalid token provided');
-    }
-    else {
-        next(error);
-    }
-});
+
 
 const hostname = '127.0.0.1';
 const port = 3333;

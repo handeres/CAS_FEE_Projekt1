@@ -54,7 +54,7 @@
          *  This function is an button event handler to edit the note
          * @returns {void}
          */
-        function editClickEventHandler() {
+        function editClickEventHandler(e) {
             view.gotToEditNoteSite(this);
         }
 
