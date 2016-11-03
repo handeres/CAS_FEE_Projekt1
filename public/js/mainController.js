@@ -8,7 +8,7 @@
     $(function() {
 
         var view = mainView.createView();
-
+        var socket = io();
         /**
          * This function initializes the main controller
          */
@@ -22,6 +22,11 @@
                                   newNoteClickEventHandler,
                                   changeStyleEventHandler);
             renderNoteList();
+
+            /* Websocket communictation for event based update of the note list */
+            socket.on('UpdateNoteList', function(msg){
+                renderNoteList();
+            });
         }
 
         /**
@@ -42,7 +47,7 @@
          * @returns {void}
          */
         function newNoteClickEventHandler() {
-            view.gotToEditNoteSite(this);
+            view.gotToNewNoteSite();
         }
 
         /**

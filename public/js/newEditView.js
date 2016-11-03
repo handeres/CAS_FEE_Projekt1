@@ -15,6 +15,10 @@ var noteView = (function($) {
 
             $("#cancel").on('click', this.goBackToMainPage);
             $("#done").on('click', this.setFinishedDate);
+
+            /* Avoid past dates */
+            var now = new Date(), minDate = now.toISOString().substring(0,10);
+            $('#date').prop('min', minDate);
         }
 
         /**
@@ -23,7 +27,7 @@ var noteView = (function($) {
          *  @returns {void}
          */
         registrySaveEvent(saveClickEventHandler) {
-            $("#save").on('click', saveClickEventHandler);
+            $("#myForm").on('submit', saveClickEventHandler);
         }
 
         /**

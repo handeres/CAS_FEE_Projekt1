@@ -54,7 +54,7 @@ button {
 	min-width: 610px;
 }
 
-.noteData {
+.noteData, form {
 	padding: 50px 50px 50px 50px;
 }
 

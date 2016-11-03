@@ -25,7 +25,8 @@
          * Click event handler to save data to a storage
          * @returns {void}
          */
-        function saveClickEventHandler() {
+        function saveClickEventHandler(e) {
+            e.preventDefault();
             var newNote = view.getValuesFromForm();
             noteRepo.saveNote(newNote, view.goBackToMainPage);
         }

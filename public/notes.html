@@ -14,14 +14,14 @@
             <h1>New Note</h1>
         </header>
         <main role="main">
-            <div class="noteData"> <!-- no form because ajax is used -->
+            <form id="myForm">
                 <div class="noteInput">
                     <label for="title">Title</label>
-                    <input name="title" id="title" type="text" pattern=".{1,}" required>
+                    <input name="title" id="title" type="text" pattern=".{1, 30}"   required>
                 </div>
                 <div class="noteInput">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" rows="10" pattern=".{1,}" required></textarea>
+                    <textarea name="description" id="description" rows="10" pattern=".{1, 50}" required></textarea>
                 </div>
                 <div class="noteInput">
                     <label for="importance">Importance</label>
@@ -35,13 +35,13 @@
                     <label for="done">Finished!</label>
                     <input name="done" id="done" type="checkbox">
                 </div>
-                <button id="save" type="save">Save</button>
-                <button id="cancel" type="reset">Cancel</button>
-
                 <input id="uniqueID" hidden>
                 <input id="finishedDate" hidden>
                 <input id="createdDate" hidden>
-            </div>
+
+                <button id="save" type="submit">Save</button>
+                <button id="cancel" type="reset">Cancel</button>
+            </form>
         </main>
 		<footer role="contentinfo">Designed by: Hannes Anderes</footer>
     </div>
