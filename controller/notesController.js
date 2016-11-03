@@ -1,4 +1,5 @@
 var noteStore = require("../services/noteStore.js");
+var socket = require("../services/socket.js");
 
 module.exports.createNote = function(req, res) {
       
@@ -11,6 +12,7 @@ module.exports.createNote = function(req, res) {
 				  req.body.done,
 				  function(err, note) {
 		res.json(note);
+		socket.notifyAllClients();
     });
 };
 
@@ -29,6 +31,7 @@ module.exports.getAll = function(req, res){
 module.exports.delete = function(req, res){
 	noteStore.delete(req.params.id, function(err, numRemoved) {
 		res.send({});
+		socket.notifyAllClients();
 	});
 };
 
@@ -44,5 +47,6 @@ module.exports.updateNote = function (req, res) {
 					  req.body.done,
 					  function(err, note) {
 	 	res.send({});
+		socket.notifyAllClients();
     });
 };

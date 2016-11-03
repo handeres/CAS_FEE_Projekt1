@@ -21,7 +21,6 @@ button {
 	display:inline-block;
 	cursor:pointer;
 	color:#ffffff;
-	/*font-family:Arial;*/
 	font-size:15px;
 	font-weight:bold;
 	padding:6px 24px;
@@ -65,4 +64,9 @@ button:hover {
 .noteEntry {
 	border-bottom: 2px solid #e0e0e0;
 	border-collapse: collapse;
+}
+
+.noteEntry:hover{
+	background:linear-gradient(to bottom, #e0e0e0 5%, #1e62d0 100%);
+	background-color:#e0e0e0;
 }

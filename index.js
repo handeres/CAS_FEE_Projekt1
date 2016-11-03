@@ -27,3 +27,5 @@ const hostname = '127.0.0.1';
 const port = 3333;
 var server = app.listen(port, hostname, () => {  console.log(`Server running at http://${hostname}:${port}/`); });
 io.listen(server);
+
+module.exports = {socket: io};

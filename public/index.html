@@ -54,7 +54,6 @@
            {{#each this}}
            <div class="noteEntry" data-uniqueID="{{_id}}">
                <div class="text">
-                   <!--<input type="date" value="{{finishUntil}}" disabled>-->
                    <label class="inline">{{finishUntil}}</label>
                    <input class="finishedNote" type="checkbox" name="Finished" {{#if done}}checked{{/if}}>
                    <label class="inline">Finished {{#if done}}[{{relativeTimeDone}}]{{/if}}</label>
