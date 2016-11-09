@@ -60,7 +60,7 @@ var noteDataStorage = (function() {
         deleteNote(id, callback) {
             rest.ajax("POST", "/notes/remove/" + id + "/", "", {}).done(function () {
                 callback();
-            }).fail(function() {
+        }).fail(function() {
                 alert( "Couldn't access to the server!");
                 callback();
             });

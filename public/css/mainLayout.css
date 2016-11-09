@@ -116,14 +116,14 @@ table {
 }
 
 .title {
-    flex: flex-start;
+	align-content: flex-start;
     width: 50%;
     padding: 0;
     margin: 0 0 10px 0;
 }
 
 .importance {
-	flex: flex-end;
+	align-content: flex-end;
 	padding: 0;
 	margin: 0 0 10px 0;
 }

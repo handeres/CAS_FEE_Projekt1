@@ -27,7 +27,7 @@ var noteView = (function($) {
          *  @returns {void}
          */
         registrySaveEvent(saveClickEventHandler) {
-            $("#noteForm").on('submit', saveClickEventHandler);
+            $("form").on('submit', saveClickEventHandler);
         }
 
         /**

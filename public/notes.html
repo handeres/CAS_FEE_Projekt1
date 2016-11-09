@@ -6,22 +6,22 @@
         <title>Note Pro- New Note</title>
 
 		<link rel="stylesheet" href="css/notesLayout.css">
-        <link class="style" rel="stylesheet" href="">
+        <link class="style" rel="stylesheet" href="%20">
     </head>
     <body>
     <div id="pageWrapper">
         <header>
             <h1>New Note</h1>
         </header>
-        <main role="main">
-            <form id="noteForm">
+        <main>
+            <form>
                 <div class="noteInput">
                     <label for="title">Title</label>
                     <input name="title" id="title" type="text" pattern=".{1,30}"   required>
                 </div>
                 <div class="noteInput">
                     <label for="description">Description</label>
-                    <textarea name="description" id="description" rows="10" pattern=".{1,100}" required></textarea>
+                    <textarea name="description" id="description" rows="10"  minlength="1" required></textarea>
                 </div>
                 <div class="noteInput">
                     <label for="importance">Importance</label>
@@ -43,7 +43,7 @@
                 <button id="cancel" type="reset">Cancel</button>
             </form>
         </main>
-		<footer role="contentinfo">Designed by: Hannes Anderes</footer>
+		<footer>Designed by: Hannes Anderes</footer>
     </div>
 
     <script src="js/libs/jquery-2.2.3.min.js"></script>

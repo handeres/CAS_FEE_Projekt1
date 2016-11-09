@@ -1,0 +1,5 @@
+- Zusätzliches Feature ist die Websocket Kommunikation, damit die Clients bei einer Änderung per Event upgedated werden.
+- Verwendung des Local Storage für die User Settings wie verwendete Filter etc.
+- Aufteilung der CSS in Layout und Style
+- Versucht die Applikation in sinnvolle Module zu zerlegen und kleine Funktionen zu bilden
+- Verwendung eines Favicon
