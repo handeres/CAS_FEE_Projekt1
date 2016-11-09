@@ -4,3 +4,7 @@
 {"title":"Houston wir haben ein Problem","description":"Leider geht ... nicht","importance":"4","createdDate":"1478681371364","finishUntil":"2016-11-16","finishedDate":"","done":false,"_id":"plapo2rDt11jY94n"}
 {"title":"Ret","description":"1234567890878","importance":"4","createdDate":1478686825120,"finishUntil":"2016-11-09","finishedDate":"","done":false,"_id":"wZ6rhBnoQqEYvFJY"}
 {"title":"New Note","description":"Beschreibung","importance":"3","createdDate":"1478180663771","finishUntil":"2016-11-03","finishedDate":"Thu Nov 03 2016 14:44:22 GMT+0100 (Mitteleuropäische Zeit)","done":true,"_id":"zpquYE5pda0u329i"}
+{"title":"Houston wir haben ein Problem","description":"Leider geht ... nicht","importance":"4","createdDate":"1478681371364","finishUntil":"2016-11-16","finishedDate":"","done":false,"_id":"plapo2rDt11jY94n"}
+{"title":"Bittet um Rückruf","description":"070899z9z9","importance":"2","createdDate":"1478686825120","finishUntil":"2016-11-14","finishedDate":"","done":false,"_id":"wZ6rhBnoQqEYvFJY"}
+{"title":"Teste Websocket 2","description":"Websocket Kommunikation ist integriert.Teste automatisches Update bei verschiedenen Tabs. ","importance":"2","createdDate":"1478190089570","finishUntil":"2016-11-15","finishedDate":"2016-11-03T16:22:43.145Z","done":true,"_id":"Ns4JJxsE5Xxl6NCB"}
+{"title":"Bittet um Rückruf","description":"070899z9z9","importance":"1","createdDate":"1478686825120","finishUntil":"2016-11-14","finishedDate":"","done":false,"_id":"wZ6rhBnoQqEYvFJY"}
